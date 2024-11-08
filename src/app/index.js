@@ -12,27 +12,27 @@ export default function Init() {
   useEffect(() => {
     const checkUserLogged = async () => {
       const userLogged = await getObjectData('userLogged')
-      if(userLogged){
+      if (userLogged) {
         login(userLogged)
         router.replace('/home')
       } else {
         router.replace('/login')
       }
     }
-    
+
     setTimeout(checkUserLogged, 3000)
-  },[])
+  }, [])
 
   return (
-      <ScrollView style={styles.container}>
-        <View style={{ flex: 1, marginTop: 100, justifyContent: 'center', alignItems: 'center'}}>
-          <Text style={{fontSize: 30}}>MyPass</Text>
-          <Text style={{fontSize: 16, marginVertical: 10} }>Organize suas contas e senhas com o MyPass.</Text>
-          <ActivityIndicator style={{marginVertical: 30}} />
-          <Footer />
-        </View>
-        
-      </ScrollView>
+    <ScrollView style={styles.container}>
+      <View style={{ flex: 1, marginTop: 100, justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={{ fontSize: 30 }}>MyPass</Text>
+        <Text style={{ fontSize: 16, marginVertical: 10 }}>Organize suas contas e senhas com o MyPass.</Text>
+        <ActivityIndicator style={{ marginVertical: 30 }} />
+        <Footer />
+      </View>
+
+    </ScrollView>
   )
 }
 

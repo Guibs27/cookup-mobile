@@ -1,22 +1,22 @@
 import { ScrollView, StyleSheet, View, Text, TextInput, Alert } from 'react-native'
 import Button from '../components/Button'
 import { useRouter } from 'expo-router'
-import {useState} from 'react'
+import { useState } from 'react'
 import { useLoginStore } from '../stores/useLoginStore'
 import { storeObjectData } from '../utils/asyncStorage'
 
 export default function Login() {
   const router = useRouter()
 
-  const {login: loginStore} = useLoginStore()
+  const { login: loginStore } = useLoginStore()
 
   const [txtEmail, setTxtEmail] = useState('')
   const [txtPass, setTxtPass] = useState('')
 
   const handleLogin = async () => {
     const login = {
-        email: txtEmail,
-        pass: txtPass
+      email: txtEmail,
+      pass: txtPass
     }
 
     const response = await fetch('http://localhost:3000/auth/login', {
@@ -27,44 +27,44 @@ export default function Login() {
       body: JSON.stringify(login)
     })
 
-    if(response.ok){
-        const data = await response.json()
-        console.log(data)
-        loginStore({accessToken: data?.accessToken, ...data.user})
-        await storeObjectData('userLogged', {accessToken: data?.accessToken, ...data.user})
-        router.push('/home')
+    if (response.ok) {
+      const data = await response.json()
+      console.log(data)
+      loginStore({ accessToken: data?.accessToken, ...data.user })
+      await storeObjectData('userLogged', { accessToken: data?.accessToken, ...data.user })
+      router.push('/home')
     } else {
-        const data = await response.json()
-        Alert.alert('Erro ao logar')
-        console.log(data?.error)
+      const data = await response.json()
+      Alert.alert('Erro ao logar')
+      console.log(data?.error)
     }
     return
-}
+  }
 
   return (
-      <ScrollView style={styles.container}>
-        <View style={{ flex: 1, marginTop: 100, justifyContent: 'center', alignItems: 'center'}}>
-          
-          <Text>Email:</Text>
-          <TextInput 
-            style={styles.input}
-            onChangeText={setTxtEmail}
-            value={txtEmail}
-          />
-          <Text>Senha:</Text>
-          <TextInput 
-            style={styles.input}
-            onChangeText={setTxtPass}
-            value={txtPass}
-            secureTextEntry={true}
-          />
-          <Button onPress={handleLogin}>Entrar</Button>
-        
-          <View style={styles.divisor}/>
+    <ScrollView style={styles.container}>
+      <View style={{ flex: 1, marginTop: 100, justifyContent: 'center', alignItems: 'center' }}>
 
-          <Button onPress={() => router.push('/signup')}>Cadastre-se</Button>
-        </View>
-      </ScrollView>
+        <Text>Email:</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={setTxtEmail}
+          value={txtEmail}
+        />
+        <Text>Senha:</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={setTxtPass}
+          value={txtPass}
+          secureTextEntry={true}
+        />
+        <Button onPress={handleLogin}>Entrar</Button>
+
+        <View style={styles.divisor} />
+
+        <Button onPress={() => router.push('/signup')}>Cadastre-se</Button>
+      </View>
+    </ScrollView>
   )
 }
 

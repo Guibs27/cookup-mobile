@@ -68,7 +68,7 @@ export default function CreateAccount(){
             value={txtImgUrl}
             keyboardType='url'
           />
-        <Button onPress={handleCreateAccount}>Cadatrar</Button>
+        <Button onPress={handleCreateAccount}>Cadastrar</Button>
         </View>
     )
 }
