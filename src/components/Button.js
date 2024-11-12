@@ -13,10 +13,10 @@ export default function Button({ onPress, children }) {
 
 const styles = StyleSheet.create({
   button: ({ pressed }) => [{
-    backgroundColor: pressed ? '#ed7900' : '#f97f01',
+    backgroundColor: pressed ? '#DA8C3C' : '#DA8C3C',
     alignItems: 'center',
     marginVertical: 10,
-    borderRadius: 15,
+    borderRadius: 5,
     paddingVertical: 5,
     paddingHorizontal: 30
   }],
