@@ -11,43 +11,58 @@ export default function Header() {
   return (
     <View style={styles.header}>
       <View style={styles.user}>
-        <Image
+        {/* <Image
           style={styles.avatar}
           source={avatar} //Local
         //source="https://avatars.githubusercontent.com/u/4259630?v=4"
+        /> */
+        }
+        <Image
+          style={styles.logo}
+          source={require('../../assets/logo.png')}
         />
-        <Text style={styles.name}>{name}</Text>
+
       </View>
-      <Link href="create-account">
-        <Feather style={styles.menu} name="plus" size={28} color="black" />
-      </Link>
+      <Feather name='menu' size={24} color='#DA8C3C' style={styles.menu} />
+      <View style={styles.divisor} />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   header: {
-    //backgroundColor: "#899986",
-    alignItems: 'center',
+    ackgroundColor: "#FAF6F2",
+    paddingVertical: 20,
+    paddingHorizontal: 15,
     flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 15,
   },
-  user: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10
+  logo: {
+    width: '200px',
+    height: '50px',
   },
-  avatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 25
+  menu: {
+
   },
+  // user: {
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  //   gap: 10
+  // },
   name: {
     fontWeight: '600',
     fontSize: 18
   },
   menu: {
-    padding: 10
-  }
+    padding: 5
+  },
+  divisor: {
+    position: 'absolute',
+    bottom: 0,
+    left: 15,
+    right: 15,
+    height: 1,
+    backgroundColor: '#DA8C3C',
+  },
 })
