@@ -13,7 +13,7 @@ export default function Button({ onPress, children }) {
 
 const styles = StyleSheet.create({
   button: ({ pressed }) => [{
-    backgroundColor: pressed ? '#DA8C3C' : '#DA8C3C',
+    backgroundColor: pressed ? '#C26C2D' : '#DA8C3C',
     alignItems: 'center',
     marginVertical: 10,
     borderRadius: 5,
@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontSize: 16,
+    // fontFamily: 'Monospace, sans-serif',
     fontWeight: "600"
   }
 })

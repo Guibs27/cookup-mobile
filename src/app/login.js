@@ -1,9 +1,10 @@
 import { ScrollView, StyleSheet, View, TextInput, Alert, Image, ImageBackground, Text } from 'react-native';
-import Button from '../components/Button';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { useLoginStore } from '../stores/useLoginStore';
 import { storeObjectData } from '../utils/asyncStorage';
+import { inputStyle } from '../components/InputText'
+import Button from '../components/Button';
 
 export default function Login() {
   const router = useRouter();
@@ -40,44 +41,40 @@ export default function Login() {
 
   return (
     <ImageBackground
-      source={require('../../assets/background.png')} // Substitua pelo caminho correto
+      source={require('../../assets/background.png')}
       style={styles.background}
     >
       <ScrollView contentContainerStyle={styles.container}>
-        <View style={styles.innerContainer}>
-
-
           <Image
             style={styles.logo}
             source={require('../../assets/logo.png')}
           />
 
-
           <TextInput
-            placeholder="Digite seu email:"
+            placeholder="E-mail"
             placeholderTextColor="#AFAFAF"
             placeholderBack="#AFAFAF"
-            style={styles.input}
+            style={inputStyle.input}
             onChangeText={setTxtEmail}
             value={txtEmail}
           />
 
           <TextInput
-            placeholder="Digite sua senha:"
+            placeholder="Senha"
             placeholderTextColor="#AFAFAF"
             placeholderBack="#AFAFAF"
-            style={styles.input}
+            style={inputStyle.input}
             onChangeText={setTxtPass}
             value={txtPass}
             secureTextEntry={true}
           />
 
-          <p style={styles.esqsenha}>Esqueceu a senha?</p>
+          <Text style={styles.esqsenha}>Esqueceu a senha?</Text>
 
           <Button onPress={handleLogin}>Entrar</Button>
           <Button onPress={() => router.push('/signup')}>Cadastre-se</Button>
 
-          <Text style={styles.text}>ou</Text>
+          <Text style={styles.alt_login}>ou</Text>
 
           <View style={styles.options}>
             <Image
@@ -93,7 +90,6 @@ export default function Login() {
               source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/1024px-Instagram_icon.png' }}
             />
           </View>
-        </View>
       </ScrollView>
     </ImageBackground>
   );
@@ -108,7 +104,16 @@ const styles = StyleSheet.create({
   },
   esqsenha: {
     fontSize: '15px',
+    marginVertical: 10,
+    // fontWeight: '...',
+    fontFamily: 'Helvetica, sans-serif',
     color: '#DA8C3C'
+  },
+  alt_login: {
+    // color: '#DA8C3C',
+    fontSize: 20,
+    fontFamily: 'Helvetica, sans-serif',
+    marginVertical: 10,
   },
   logo: {
     width: '200px',
@@ -121,17 +126,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 16,
   },
-  innerContainer: {
-    flex: 2,
-    marginTop: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    color: '#841C94',
-    marginVertical: 10,
-
-  },
   options: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -143,16 +137,6 @@ const styles = StyleSheet.create({
     height: 50,
     marginHorizontal: 10,
     borderRadius: 25,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#444444',
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    marginVertical: 5,
-    borderRadius: 5,
-    width: '90%',
-    backgroundColor: '#EDEAEA',
   },
   divisor: {
     borderBottomColor: '#CCC',
