@@ -15,9 +15,9 @@ const styles = StyleSheet.create({
   button: ({ pressed }) => [{
     backgroundColor: pressed ? '#C26C2D' : '#DA8C3C',
     alignItems: 'center',
-    marginVertical: 10,
+    marginVertical: 8,
     borderRadius: 5,
-    paddingVertical: 10,
+    paddingVertical: 8,
     paddingHorizontal: 30
   }],
   text: {
