@@ -11,12 +11,7 @@ export default function Header() {
   return (
     <View style={styles.header}>
       <View style={styles.user}>
-        {/* <Image
-          style={styles.avatar}
-          source={avatar} //Local
-        //source="https://avatars.githubusercontent.com/u/4259630?v=4"
-        /> */
-        }
+    
         <Image
           style={styles.logo}
           source={require('../../assets/logo.png')}

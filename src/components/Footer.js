@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 export default function Footer() {
   return (
     <View style={styles.footer}>
-      <Text style={styles.copy}>Copyright © 2024 Renan Cavichi</Text>
+      <Text style={styles.copy}>Copyright © 2024 Cookup.com</Text>
     </View>
   )
 }
