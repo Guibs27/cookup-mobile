@@ -17,12 +17,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 10,
     borderRadius: 5,
-    paddingVertical: 5,
+    paddingVertical: 10,
     paddingHorizontal: 30
   }],
   text: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 20,
     // fontFamily: 'Monospace, sans-serif',
     fontWeight: "600"
   }

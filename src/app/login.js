@@ -44,53 +44,53 @@ export default function Login() {
       source={require('../../assets/background.png')}
       style={styles.background}
     >
-      <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.container}>
+        <Image
+          style={styles.logo}
+          source={require('../../assets/logo.png')}
+        />
+
+        <TextInput
+          placeholder="E-mail"
+          placeholderTextColor="#AFAFAF"
+          placeholderBack="#AFAFAF"
+          style={inputStyle.input}
+          onChangeText={setTxtEmail}
+          value={txtEmail}
+        />
+
+        <TextInput
+          placeholder="Senha"
+          placeholderTextColor="#AFAFAF"
+          placeholderBack="#AFAFAF"
+          style={inputStyle.input}
+          onChangeText={setTxtPass}
+          value={txtPass}
+          secureTextEntry={true}
+        />
+
+        <Text style={styles.esqsenha}>Esqueceu a senha?</Text>
+
+        <Button onPress={handleLogin}>Entrar</Button>
+        <Button onPress={() => router.push('/signup')}>Cadastre-se</Button>
+
+        <Text style={styles.alt_login}>ou</Text>
+
+        <View style={styles.options}>
           <Image
-            style={styles.logo}
-            source={require('../../assets/logo.png')}
+            style={styles.image}
+            source={require('../../assets/google-logo.png')}
           />
-
-          <TextInput
-            placeholder="E-mail"
-            placeholderTextColor="#AFAFAF"
-            placeholderBack="#AFAFAF"
-            style={inputStyle.input}
-            onChangeText={setTxtEmail}
-            value={txtEmail}
+          <Image
+            style={styles.image}
+            source={require('../../assets/facebook-icon.png')}
           />
-
-          <TextInput
-            placeholder="Senha"
-            placeholderTextColor="#AFAFAF"
-            placeholderBack="#AFAFAF"
-            style={inputStyle.input}
-            onChangeText={setTxtPass}
-            value={txtPass}
-            secureTextEntry={true}
+          <Image
+            style={styles.image}
+            source={require('../../assets/instagram-icon.png')}
           />
-
-          <Text style={styles.esqsenha}>Esqueceu a senha?</Text>
-
-          <Button onPress={handleLogin}>Entrar</Button>
-          <Button onPress={() => router.push('/signup')}>Cadastre-se</Button>
-
-          <Text style={styles.alt_login}>ou</Text>
-
-          <View style={styles.options}>
-            <Image
-              style={styles.image}
-              source={{ uri: 'https://static-00.iconduck.com/assets.00/google-icon-2048x2048-pks9lbdv.png' }}
-            />
-            <Image
-              style={styles.image}
-              source={{ uri: 'https://cdn-icons-png.flaticon.com/256/124/124010.png' }}
-            />
-            <Image
-              style={styles.image}
-              source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/1024px-Instagram_icon.png' }}
-            />
-          </View>
-      </ScrollView>
+        </View>
+      </View>
     </ImageBackground>
   );
 }
@@ -101,6 +101,12 @@ const styles = StyleSheet.create({
     resizeMode: 'center',
     width: 'auto',
     height: 'auto'
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignContent: 'center',
+    padding: 35,
   },
   esqsenha: {
     fontSize: '15px',
@@ -114,17 +120,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: 'Helvetica, sans-serif',
     marginVertical: 10,
+    alignSelf: 'center'
   },
   logo: {
     width: '200px',
     height: '50px',
     marginBottom: '20px',
-  },
-  container: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
+    alignSelf: 'center'
   },
   options: {
     flexDirection: 'row',
@@ -133,8 +135,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   image: {
-    width: 50,
-    height: 50,
+    width: 55,
+    height: 54,
     marginHorizontal: 10,
     borderRadius: 25,
   },

@@ -1,9 +1,9 @@
 import {View, StyleSheet, Text, TextInput} from 'react-native'
 import { useState } from "react"
-import Button from '../../components/Button'
 import { useRouter } from 'expo-router'
 import { useAccountStore } from '../../stores/useAccountStore'
 import { fetchAuth } from '../../utils/fetchAuth'
+import Button from '../../components/Button'
 
 export default function CreateAccount(){
 
