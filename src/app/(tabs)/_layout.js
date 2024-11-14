@@ -14,7 +14,7 @@ export default function TabLayout() {
         tabBarStyle: styles.bar,
       }}
     >
-      <Tabs.Screen
+       <Tabs.Screen
         name="home"
         options={{
           tabBarLabel: '',

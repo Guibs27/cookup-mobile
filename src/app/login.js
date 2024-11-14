@@ -138,11 +138,5 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     borderRadius: 25,
   },
-  divisor: {
-    borderBottomColor: '#CCC',
-    borderBottomWidth: 1,
-    width: '90%',
-    marginVertical: 50,
-  },
 });
 

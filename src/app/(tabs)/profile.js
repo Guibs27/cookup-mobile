@@ -7,62 +7,78 @@ import { deleteObjectData } from '../../utils/asyncStorage'
 
 export default function Profile() {
 
-    const {avatar, name} = useLoginStore()
-    const { logout: logoutStore, accessToken } = useLoginStore()
-    const router = useRouter()
+  const { avatar, name } = useLoginStore()
+  const { logout: logoutStore, accessToken } = useLoginStore()
+  const router = useRouter()
 
-    const handleLogout = async () => {
-        const logout = {
-            accessToken 
-        }
-
-        const response = await fetch('http://localhost:3000/auth/logout', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(logout)
-        })
-
-        if(response.ok){
-            const data = await response.json()
-            console.log(data)
-            logoutStore()
-            await deleteObjectData('userLogged')
-            router.replace('/login')
-        } else {
-            const data = await response.json()
-            Alert.alert('Erro ao logar')
-            console.log(data?.error)
-        }
-        return
+  const handleLogout = async () => {
+    const logout = {
+      accessToken
     }
 
+    const response = await fetch('http://localhost:3000/auth/logout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(logout)
+    })
+
+    if (response.ok) {
+      const data = await response.json()
+      console.log(data)
+      logoutStore()
+      await deleteObjectData('userLogged')
+      router.replace('/login')
+    } else {
+      const data = await response.json()
+      Alert.alert('Erro ao logar')
+      console.log(data?.error)
+    }
+    return
+  }
+
   return (
-      <View style={styles.container}>
-          <Image
+    <View style={styles.container}>
+
+        <Image
           style={styles.avatar}
           source={avatar} //Local
         //source="https://avatars.githubusercontent.com/u/4259630?v=4"
-        /> 
+        />
       
+      <View style={styles.info}>
         <Text style={styles.name}>{name}</Text>
         <Button onPress={handleLogout}>Logout</Button>
       </View>
+      </View>
+  
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    gap: 30,
+    display: 'flex',
+  },
+  info: {
+    display: 'flex',
+    fontSize: '20px',
     alignItems: 'center',
-    gap: 30
+  },
+  foto: {
+    display: 'flex',
   },
   avatar: {
-    width: 150,
-    height: 150,
-    borderRadius: 80
+    width: 100,
+    height: 100,
+    borderRadius: 80,
+    borderColor: '#DA8C3C',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    marginLeft: '20px',
+    marginTop: '20px',
   },
   name: {
     fontSize: 20
