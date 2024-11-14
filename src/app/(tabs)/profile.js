@@ -40,10 +40,12 @@ export default function Profile() {
 
   return (
       <View style={styles.container}>
-        <Image
-            source={avatar}
-            style={styles.avatar}
-        />
+          <Image
+          style={styles.avatar}
+          source={avatar} //Local
+        //source="https://avatars.githubusercontent.com/u/4259630?v=4"
+        /> 
+      
         <Text style={styles.name}>{name}</Text>
         <Button onPress={handleLogout}>Logout</Button>
       </View>
@@ -64,5 +66,10 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 20
-  }
+  },
+  user: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10
+  },
 })
