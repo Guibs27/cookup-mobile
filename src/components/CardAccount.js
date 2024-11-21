@@ -1,52 +1,54 @@
-import { View, Text, StyleSheet, Pressable } from 'react-native'
-import { Image } from 'expo-image'
+import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { Image } from 'expo-image';
 import { useRouter } from 'expo-router'
 
 export default function CardAccount({ id, service, userName, imgUrl }) {
-
   const router = useRouter()
 
   return (
     <Pressable onPress={() => router.push({ pathname: '/show-pass', params: { id } })}>
       <View style={styles.card}>
+        {/* Imagem principal utilizando imgUrl */}
+        <Image style={styles.imgUrl} source={imgUrl} />
 
-        <Image
-          style={styles.logo}
-          source={imgUrl}
-        />
-
+        {/* Conteúdo */}
         <View style={styles.content}>
+          {/* Service como título */}
           <Text style={styles.service}>{service}</Text>
-          <Text style={styles.username}>{userName}</Text>
 
+          {/* userName como subtítulo ou descrição */}
+          <Text style={styles.userName}>{userName}</Text>
         </View>
       </View>
     </Pressable>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   card: {
-    padding: 10,
+    margin: 10,
     borderStyle: 'solid',
     borderColor: '#EEEEEE',
     borderWidth: 1,
-    flexDirection: 'row',
-    gap: 15,
     borderRadius: 10,
-    alignItems: 'center'
+    overflow: 'hidden',
+    backgroundColor: '#FFF',
   },
-  logo: {
-    width: 60,
-    height: 60
+  imgUrl: {
+    width: '100%',
+    height: 200,
   },
   content: {
-    gap: 6
+    padding: 10,
   },
   service: {
-    fontSize: 17
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 5,
   },
-  username: {
-    color: '#777777'
-  }
-})
+  userName: {
+    fontSize: 14,
+    color: '#777',
+    marginBottom: 10,
+  },
+});

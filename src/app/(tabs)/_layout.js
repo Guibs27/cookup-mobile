@@ -14,7 +14,7 @@ export default function TabLayout() {
         tabBarStyle: styles.bar,
       }}
     >
-       <Tabs.Screen
+      <Tabs.Screen
         name="home"
         options={{
           tabBarLabel: '',
@@ -31,6 +31,7 @@ export default function TabLayout() {
           ),
         }}
       />
+
       <Tabs.Screen
         name="create-account"
         options={{
@@ -40,6 +41,7 @@ export default function TabLayout() {
           ),
         }}
       />
+      
       <Tabs.Screen
         name="profile"
         options={{

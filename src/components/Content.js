@@ -5,7 +5,6 @@ import { useAccountStore } from '../stores/useAccountStore'
 import { fetchAuth } from '../utils/fetchAuth'
 
 export default function Content() {
-
   const { accounts, setAccounts } = useAccountStore()
 
   console.log('Accounts: ', accounts)

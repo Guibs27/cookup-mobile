@@ -6,7 +6,7 @@ export const useLoginStore = create((set) => ({
   name: '',
   avatar: '',
   email: '',
-  birth_date: null, // Adicionando a nova propriedade
+  birth_date: null,
 
   login: (userLogin) => set({ ...userLogin }),
   logout: () => set({
@@ -15,6 +15,6 @@ export const useLoginStore = create((set) => ({
     name: '',
     avatar: '',
     email: '',
-    birth_date: null // Resetando a nova propriedade
+    birth_date: null
   }),
 }));
