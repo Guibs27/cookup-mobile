@@ -1,4 +1,4 @@
-import { create } from "zustand"
+import { create } from "zustand";
 
 export const useLoginStore = create((set) => ({
   accessToken: '',
@@ -6,6 +6,7 @@ export const useLoginStore = create((set) => ({
   name: '',
   avatar: '',
   email: '',
+  birth_date: null, // Adicionando a nova propriedade
 
   login: (userLogin) => set({ ...userLogin }),
   logout: () => set({
@@ -13,6 +14,7 @@ export const useLoginStore = create((set) => ({
     public_id: '',
     name: '',
     avatar: '',
-    email: ''
-  })
-}))
+    email: '',
+    birth_date: null // Resetando a nova propriedade
+  }),
+}));
