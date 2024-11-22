@@ -41,16 +41,6 @@ export default function CreateAccount(){
 
     return( 
         <View style={styles.container}>
-
-          <Image>
-            
-          </Image>
-
-
-
-
-
-
           <Text>Serviço:</Text>
           <TextInput 
             style={styles.input}

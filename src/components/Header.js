@@ -12,8 +12,9 @@ export default function Header() {
           source={require('../../assets/logo.png')}
         />
       </View>
-      
+      <Link href={'category-page'}>
       <Feather name='menu' size={24} color='#DA8C3C' style={styles.menu} />
+      </Link>
       <View style={styles.divisor} />
     </View>
   )

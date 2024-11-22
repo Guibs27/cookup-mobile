@@ -33,7 +33,7 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="create-account"
+        name="create-post"
         options={{
           tabBarLabel: '',
           tabBarIcon: () => (
