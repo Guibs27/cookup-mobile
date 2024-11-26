@@ -19,15 +19,7 @@ export default function TabLayout() {
         options={{
           tabBarLabel: '',
           tabBarIcon: () => (
-            <Image style={styles.bell} source={require('../../../assets/bell.png')} />
-          ),
-          tabBarButton: (props) => (
-            <TouchableOpacity
-              {...props}
-              onPress={() => {
-                // Intercepta o clique e não faz nada
-              }}
-            />
+            <Feather name='home' size={28} color={'#fff'} />
           ),
         }}
       />
@@ -37,11 +29,21 @@ export default function TabLayout() {
         options={{
           tabBarLabel: '',
           tabBarIcon: () => (
-            <Image style={styles.plus} source={require('../../../assets/plus.png')} />
+            <Feather name='plus' size={35} color={'#fff'} style={styles.icons} />
           ),
         }}
       />
-      
+
+      <Tabs.Screen
+        name="bell"
+        options={{
+          tabBarLabel: '',
+          tabBarIcon: () => (
+            <Feather name='bell' size={28} color={'#fff'} style={styles.icons} />
+          ),
+        }}
+      />
+
       <Tabs.Screen
         name="profile"
         options={{
