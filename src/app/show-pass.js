@@ -1,17 +1,16 @@
 import { View, StyleSheet, Text, TextInput } from 'react-native'
-import { Image } from 'expo-image'
-import Button from '../components/Button'
 import { useLocalSearchParams, useRouter } from 'expo-router'
+import { Image } from 'expo-image'
 import { useAccountStore } from '../stores/useAccountStore'
-import * as Clipboard from 'expo-clipboard'
 import { fetchAuth } from '../utils/fetchAuth'
+import { inputStyle } from '../components/InputText';
+import Button from '../components/Button'
+import * as Clipboard from 'expo-clipboard'
 
 export default function ShowPass() {
-
   const router = useRouter()
   const { id } = useLocalSearchParams()
   const { accounts, deleteAccount } = useAccountStore()
-
   const account = accounts.find((item) => item.id === +id)
 
   const handleDelete = async () => {
@@ -46,13 +45,15 @@ export default function ShowPass() {
           <Text style={styles.username}>{account?.username}</Text>
         </View>
       </View>
+
       <View>
-        <TextInput style={styles.input} value={account?.pass || ''} />
+        <TextInput style={inputStyle.input} value={account?.pass || ''} />
       </View>
+
       <Button onPress={copyToClipboard}>Copiar Senha</Button>
       <View style={{ flexDirection: 'row', gap: 20, flex: 1, justifyContent: 'space-between' }}>
         <Button onPress={() => router.push({ pathname: '/update', params: { id } })}>Editar</Button>
-        <Button onPress={handleDelete}>🗑 Excluir</Button>
+        <Button onPress={handleDelete}>Excluir</Button>
       </View>
     </View>
   )

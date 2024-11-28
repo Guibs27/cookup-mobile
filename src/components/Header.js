@@ -22,7 +22,7 @@ export default function Header() {
 
 const styles = StyleSheet.create({
   header: {
-    ackgroundColor: "#FAF6F2",
+    // backgroundColor: "#FAF6F2",
     paddingVertical: 20,
     paddingHorizontal: 15,
     flexDirection: 'row',
