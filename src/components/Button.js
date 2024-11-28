@@ -15,15 +15,14 @@ const styles = StyleSheet.create({
   button: ({ pressed }) => [{
     backgroundColor: pressed ? '#C26C2D' : '#DA8C3C',
     alignItems: 'center',
-    marginVertical: 8,
+    marginVertical: 5,
     borderRadius: 5,
     paddingVertical: 8,
     paddingHorizontal: 30
   }],
   text: {
-    color: 'white',
+    color: '#fff',
     fontSize: 20,
-    // fontFamily: 'Monospace, sans-serif',
     fontWeight: "600"
   }
 })

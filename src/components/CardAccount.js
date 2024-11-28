@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     overflow: 'hidden',
-    backgroundColor: '#FFF',
+    backgroundColor: '#fcfcfc'
   },
   imgUrl: {
     width: '100%',

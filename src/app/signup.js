@@ -136,7 +136,7 @@ export default function SignUp() {
           keyboardType="numeric"
           placeholder="Data de nascimento (dd/mm/yyyy)"
           placeholderTextColor="#b8b8b8"
-          maxLength={10} // Limita a entrada a 10 caracteres
+          maxLength={10}
         />
 
         <Button onPress={handleCreateAccount}>Cadastrar</Button>
@@ -164,11 +164,11 @@ export default function SignUp() {
 
 const styles = StyleSheet.create({
   content: {
-    padding: 35,
+    padding: 35
   },
   header: {
     alignItems: 'center',
-    marginTop: 125,
+    marginTop: 125
   },
   cook_icon: {
     width: 55,
@@ -179,19 +179,19 @@ const styles = StyleSheet.create({
   logo: {
     width: 250,
     height: 80,
-    marginBottom: 20,
+    marginBottom: 20
   },
   options: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 20
   },
   image: {
     width: 55,
     height: 54,
     marginHorizontal: 10,
-    borderRadius: 25,
+    borderRadius: 25
   },
   alt_login: {
     // color: '#DA8C3C',
@@ -204,6 +204,6 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: 'center',
     width: 'auto',
-    height: 'auto',
+    height: 'auto'
   },
 });

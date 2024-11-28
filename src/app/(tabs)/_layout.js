@@ -25,7 +25,7 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="create-post"
+        name="create-recipe"
         options={{
           tabBarLabel: '',
           tabBarIcon: () => (

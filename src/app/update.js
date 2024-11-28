@@ -6,11 +6,9 @@ import { useAccountStore } from '../stores/useAccountStore'
 import { fetchAuth } from '../utils/fetchAuth'
 
 export default function Update() {
-
-  const { accounts, updateAccount } = useAccountStore()
   const router = useRouter()
   const { id } = useLocalSearchParams()
-
+  const { accounts, updateAccount } = useAccountStore()
   const account = accounts.find((item) => item.id === +id)
 
   const [txtServico, setTxtServico] = useState(account?.service || '')

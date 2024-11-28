@@ -5,7 +5,7 @@ import Button from '../../components/Button';
 import { useLoginStore } from '../../stores/useLoginStore';
 import { useRouter } from 'expo-router';
 import { deleteObjectData } from '../../utils/asyncStorage';
-// import { inputStyle } from '../components/InputText';
+import { inputStyle } from '../../components/InputText';
 
 export default function Profile() {
   const { avatar, name, birth_date, email } = useLoginStore(); // Chamando birth_date
@@ -44,6 +44,7 @@ export default function Profile() {
       source={require('../../../assets/background.png')}
       style={styles.background}
     >
+<<<<<<< HEAD
       <View>
         <View style={styles.container}>
           <Link href="home">
@@ -65,88 +66,91 @@ export default function Profile() {
             <Text style={styles.emaildate}>Data de nascimento:</Text>
             <Text style={styles.birthDate}>{birth_date}</Text>
             <Button onPress={() => router.push('../update-user')}>Editar Perfil</Button>
+=======
+      <View style={styles.container}>
+        <Link href="home">
+          <Image
+            style={styles.cook_icon}
+            source={require('../../../assets/cookie-icon.png')}
+          />
+        </Link>
+
+        <View style={styles.main}>
+          <Image
+            style={styles.avatar}
+            source={avatar}
+          />
+          <Text style={styles.name}>{name}</Text>
+        </View>
+
+        <View style={styles.info}>
+          <Text style={styles.title}>Email:</Text>
+          <Text style={inputStyle.input}>{email}</Text>
+
+          <Text style={styles.title}>Data de nascimento:</Text>
+          <Text style={inputStyle.input}>{birth_date}</Text>
+
+          <View style={styles.buttons}>
+            <Button onPress={null}>Editar Perfil</Button>
+>>>>>>> 4dbcb451ce4e6f83d2698720f596611fa6f152ab
             <Button onPress={handleLogout}>Logout</Button>
           </View>
         </View>
       </View>
-    </ImageBackground >
+    </ImageBackground>
 
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    gap: 30,
-    display: 'flex',
-
-  },
-  cook_icon: {
-    width: 55,
-    height: 40,
-    marginLeft: 5,
-    marginTop: 10,
-
-  },
-  emaildate: {
-    fontSize: 20,
-  },
   background: {
     flex: 1,
     resizeMode: 'center',
     width: 'auto',
     height: 'auto'
   },
-  cont1: {
-    display: 'flex',
+  container: {
+    flex: 1,
+    gap: 30,
+    padding: 10
+  },
+  cook_icon: {
+    width: 55,
+    height: 40,
+    marginLeft: 5
+  },
+  main: {
     flexDirection: 'row',
-    alignItems: 'center',
-  },
-  info: {
-    display: 'flex',
-    fontSize: '20px',
-    alignItems: 'flex-start',
-    margin: 20,
-  },
-  email: {
-    borderWidth: 1,
-    color: '#00000',
-    borderStyle: 'none',
-    // borderColor: '#5e5e5e',
-    backgroundColor: '#EDEAEA',
-    paddingHorizontal: 14,
-    paddingVertical: 10,
-    marginVertical: 5,
-    borderRadius: 5,
+    alignItems: 'center'
   },
   avatar: {
-    width: 100,
-    height: 100,
+    width: 120,
+    height: 120,
     borderRadius: 80,
     borderColor: '#DA8C3C',
     borderStyle: 'solid',
     borderWidth: 1,
     marginLeft: '20px',
-    marginTop: '20px',
-    display: 'flex'
+    marginTop: '20px'
   },
   name: {
     fontSize: 25,
     fontWeight: '600',
-    display: 'flex',
     marginLeft: 20,
-    marginTop: 15,
+    marginTop: 15
   },
-  birthDate: {
-    borderWidth: 1,
-    color: '#00000',
-    borderStyle: 'none',
-    // borderColor: '#5e5e5e',
-    backgroundColor: '#EDEAEA',
-    paddingHorizontal: 14,
-    paddingVertical: 10,
-    marginVertical: 5,
-    borderRadius: 5,
+  info: {
+    justifyContent: 'center',
+    alignContent: 'center',
+    margin: 20
   },
-
+  title: {
+    fontSize: 20,
+    marginTop: 8
+  },
+  buttons: {
+    justifyContent: 'center',
+    alignContent: 'center',
+    marginTop: 15
+  }
 });
