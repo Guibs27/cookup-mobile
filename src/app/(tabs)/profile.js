@@ -64,7 +64,7 @@ export default function Profile() {
             <Text style={styles.email}>{email}</Text>
             <Text style={styles.emaildate}>Data de nascimento:</Text>
             <Text style={styles.birthDate}>{birth_date}</Text>
-            <Button onPress={null}>Editar Perfil</Button>
+            <Button onPress={() => router.push('../update-user')}>Editar Perfil</Button>
             <Button onPress={handleLogout}>Logout</Button>
           </View>
         </View>
