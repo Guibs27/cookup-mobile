@@ -40,6 +40,10 @@ export default function UpdateUser() {
   };
 
   return (
+    <ImageBackground
+    source={require('../../assets/background.png')}
+    style={styles.background}
+  >
     <View style={styles.container}>
       <Text style={styles.label}>Nome:</Text>
       <TextInput
@@ -61,7 +65,7 @@ export default function UpdateUser() {
         style={styles.input}
         value={newBirthDate}
         onChangeText={setNewBirthDate}
-        placeholder="YYYY-MM-DD"
+        placeholder="DD-MM-YYYY"
       />
       <Text style={styles.label}>URL do Avatar:</Text>
       <TextInput
@@ -73,11 +77,13 @@ export default function UpdateUser() {
       />
       <Button onPress={handleUpdateProfile}>Salvar Alterações</Button>
     </View>
+    </ImageBackground >
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 200,
     flex: 1,
     padding: 20,
     backgroundColor: '#fff',
