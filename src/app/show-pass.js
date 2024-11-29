@@ -1,7 +1,7 @@
 import { View, StyleSheet, Text, TextInput } from 'react-native'
 import { useLocalSearchParams, useRouter } from 'expo-router'
 import { Image } from 'expo-image'
-import { useAccountStore } from '../stores/useAccountStore'
+import { useRecipeStore } from '../stores/useRecipeStore'
 import { fetchAuth } from '../utils/fetchAuth'
 import { inputStyle } from '../components/InputText';
 import Button from '../components/Button'
@@ -10,7 +10,7 @@ import * as Clipboard from 'expo-clipboard'
 export default function ShowPass() {
   const router = useRouter()
   const { id } = useLocalSearchParams()
-  const { accounts, deleteAccount } = useAccountStore()
+  const { accounts, deleteAccount } = useRecipeStore()
   const account = accounts.find((item) => item.id === +id)
 
   const handleDelete = async () => {

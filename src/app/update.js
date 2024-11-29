@@ -2,13 +2,13 @@ import { View, StyleSheet, Text, TextInput } from 'react-native'
 import { useState } from "react"
 import Button from '../components/Button'
 import { useRouter, useLocalSearchParams } from 'expo-router'
-import { useAccountStore } from '../stores/useAccountStore'
+import { useRecipeStore } from '../stores/useRecipeStore'
 import { fetchAuth } from '../utils/fetchAuth'
 
 export default function Update() {
   const router = useRouter()
   const { id } = useLocalSearchParams()
-  const { accounts, updateAccount } = useAccountStore()
+  const { accounts, updateAccount } = useRecipeStore()
   const account = accounts.find((item) => item.id === +id)
 
   const [txtServico, setTxtServico] = useState(account?.service || '')

@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, View, TextInput, Alert, Image, ImageBackground, Text } from 'react-native';
+import { StyleSheet, View, TextInput, Alert, Image, ImageBackground, Text } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { useLoginStore } from '../stores/useLoginStore';
