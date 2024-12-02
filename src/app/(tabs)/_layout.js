@@ -1,7 +1,7 @@
 import Feather from '@expo/vector-icons/Feather';
 import { Tabs, useRouter } from 'expo-router';
 import { useLoginStore } from '../../stores/useLoginStore';
-import { StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 
 export default function TabLayout() {
   const { avatar } = useLoginStore();
@@ -11,7 +11,7 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarStyle: styles.bar,
+        tabBarStyle: styles.bar
       }}
     >
       <Tabs.Screen
@@ -29,13 +29,13 @@ export default function TabLayout() {
         options={{
           tabBarLabel: '',
           tabBarIcon: () => (
-            <Feather name='plus' size={35} color={'#fff'} style={styles.icons} />
+            <Feather name='plus' size={34} color={'#fff'} style={styles.icons} />
           ),
         }}
       />
 
       <Tabs.Screen
-        name="bell"
+        name="notifications"
         options={{
           tabBarLabel: '',
           tabBarIcon: () => (

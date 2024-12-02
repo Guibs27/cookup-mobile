@@ -43,9 +43,9 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    resizeMode: 'cover',
-    width: '100%',
-    height: '100%'
+    resizeMode: 'center',
+    width: 'auto',
+    height: 'auto'
   },
   logo: {
     width: 250,
@@ -54,10 +54,10 @@ const styles = StyleSheet.create({
   },
   txtCategory: {
     color: '#DA8C3C',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '600',
     textAlign: 'center',
-    marginTop: 20
+    marginTop: 15
   },
   fullCategory: {
     flexDirection: 'column',

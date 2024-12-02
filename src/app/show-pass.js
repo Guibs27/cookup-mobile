@@ -61,7 +61,7 @@ export default function ShowPass() {
 
 const styles = StyleSheet.create({
   card: {
-    padding: 10,
+    padding: 30,
     flexDirection: 'row',
     gap: 15,
     borderRadius: 10,

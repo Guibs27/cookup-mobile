@@ -1,8 +1,8 @@
 import { View, StyleSheet, Text, TextInput, Alert } from 'react-native';
 import { useState } from 'react';
-import Button from '../components/Button';
 import { useLoginStore } from '../stores/useLoginStore';
 import { useRouter } from 'expo-router';
+import Button from '../components/Button';
 
 export default function UpdateUser() {
   const { avatar, name, birth_date, email, updateProfile } = useLoginStore();

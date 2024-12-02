@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput, Image, ImageBackground, TouchableOpacity, Button as RNButton } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
+import { useState } from 'react';
 import { useRecipeStore } from '../../stores/useRecipeStore';
 import { fetchAuth } from '../../utils/fetchAuth';
+import * as ImagePicker from 'expo-image-picker';
 import Button from '../../components/Button';
 
 export default function CreateRecipe() {
@@ -36,28 +36,47 @@ export default function CreateRecipe() {
 
   // Função para criar uma nova receita
   const handleCreateRecipe = async () => {
-    const recipe = {
-      title,
-      ingredients,
-      method,
-      comment,
-      category,
-      image, // URL ou base64 da imagem
-    };
+    const formData = new FormData();
 
-    const response = await fetchAuth('http://localhost:3000/recipe', {
-      method: 'POST',
-      body: JSON.stringify(recipe),
-    });
+    // Adiciona os dados da receita
+    formData.append('title', title);
+    formData.append('ingredients', ingredients);
+    formData.append('method', method);
+    formData.append('comment', comment);
+    formData.append('category', category);
 
-    if (response.ok) {
-      const data = await response.json();
-      addRecipe(data.recipe);
-      alert('Receita criada com sucesso!');
-    } else {
-      alert('Erro ao criar receita!');
+    // Adiciona a imagem ao FormData
+    if (image) {
+      const filename = image.split('/').pop();
+      const fileType = filename.split('.').pop();
+      formData.append('image', {
+        uri: image,
+        name: filename,
+        type: `image/${fileType}`,
+      });
+    }
+
+    try {
+      const response = await fetch('http://localhost:3000/recipe', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      if (response.ok) {
+        alert('Receita criada com sucesso!');
+      } else {
+        const errorData = await response.json();
+        alert(`Erro: ${errorData.error}`);
+      }
+    } catch (error) {
+      console.error('Erro ao criar receita:', error);
+      alert('Erro ao conectar com o servidor.');
     }
   };
+
 
   return (
     <ImageBackground
@@ -82,7 +101,7 @@ export default function CreateRecipe() {
         <TextInput
           style={styles.input}
           placeholder="Insira um título para sua receita"
-          placeholderTextColor="gray"
+          placeholderTextColor="#8a8a8a"
           value={title}
           onChangeText={setTitle}
         />
@@ -91,7 +110,7 @@ export default function CreateRecipe() {
         <TextInput
           style={[styles.input, styles.textArea]}
           placeholder="Escreva os ingredientes"
-          placeholderTextColor="gray"
+          placeholderTextColor="#8a8a8a"
           value={ingredients}
           onChangeText={setIngredients}
           multiline
@@ -101,7 +120,7 @@ export default function CreateRecipe() {
         <TextInput
           style={[styles.input, styles.textArea]}
           placeholder="Escreva o modo de preparo"
-          placeholderTextColor="gray"
+          placeholderTextColor="#8a8a8a"
           value={method}
           onChangeText={setMethod}
           multiline
@@ -111,7 +130,7 @@ export default function CreateRecipe() {
         <TextInput
           style={[styles.input, styles.textArea]}
           placeholder="Escreva o comentário"
-          placeholderTextColor="gray"
+          placeholderTextColor="#8a8a8a"
           value={comment}
           onChangeText={setComment}
           multiline
@@ -125,7 +144,7 @@ export default function CreateRecipe() {
         </TouchableOpacity>
 
         {/* Botão para publicar */}
-        <Button onPress={handleCreateRecipe}>Publicar</Button>
+        <Button onPress={handleCreateRecipe}>Adicionar</Button>
       </View>
     </ImageBackground>
   );
@@ -145,6 +164,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 25,
+    fontWeight: '400',
     color: '#DA8C3C',
     marginBottom: 15,
   },
@@ -159,7 +179,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   imageText: {
-    color: 'gray',
+    color: '#8a8a8a',
     fontSize: 16,
   },
   image: {

@@ -15,7 +15,7 @@
 //       <Stack.Screen name="index" options={{ headerShown: false }} />
 //       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 //       <Stack.Screen name="signup" options={{ title: "Cadastre-se" }} />
-//       <Stack.Screen name="create-account" options={{ title: "Adicionar Conta" }} />
+//       <Stack.Screen name="create-recipe" options={{ title: "Adicionar Conta" }} />
 //       <Stack.Screen name="show-pass" options={{ title: "Ver Senha" }} />
 //       <Stack.Screen name="update" options={{ title: "Editar" }} />
 //     </Stack>

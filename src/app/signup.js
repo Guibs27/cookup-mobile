@@ -164,7 +164,7 @@ export default function SignUp() {
 
 const styles = StyleSheet.create({
   content: {
-    padding: 35
+    padding: 30
   },
   header: {
     alignItems: 'center',
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20
+    marginTop: 10
   },
   image: {
     width: 55,
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     // color: '#DA8C3C',
     fontSize: 20,
     fontFamily: 'Helvetica, sans-serif',
-    marginVertical: 10,
+    marginVertical: 20,
     alignSelf: 'center'
   },
   background: {

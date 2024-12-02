@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, StyleSheet, Text, FlatList, TouchableOpacity, ImageBackground, Alert } from 'react-native';
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
@@ -14,51 +13,52 @@ export default function Notifications() {
     { id: '3', title: 'Receita favorita atualizada', description: 'Sua receita favorita agora possui novas dicas.', time: '1 hora atrás' },
   ];
 
-  const handleNotificationAction = (id) => {
-    Alert.alert(`Ação realizada para a notificação ${id}`);
-  };
-
   const renderNotification = ({ item }) => (
-    <View style={styles.notificationItem}>
+    <View style={styles.notItem}>
       <Image
-        style={styles.notificationIcon}
+        style={styles.notIcon}
         source={require('../../../assets/bellATC.png')}
       />
-      <View style={styles.notificationText}>
-        <Text style={styles.notificationTitle}>{item.title}</Text>
-        <Text style={styles.notificationDescription}>{item.description}</Text>
-        <Text style={styles.notificationTime}>{item.time}</Text>
+      <View style={styles.notText}>
+        <Text style={styles.notTitle}>{item.title}</Text>
+        <Text style={styles.notDescr}>{item.description}</Text>
+        <Text style={styles.notTime}>{item.time}</Text>
       </View>
-      <TouchableOpacity onPress={() => handleNotificationAction(item.id)}>
-        <Feather name="check-circle" size={24} color="#4CAF50" />
-      </TouchableOpacity>
     </View>
   );
 
   return (
-    
+    <ImageBackground
+      source={require('../../../assets/background.png')}
+      style={styles.background}
+    >
       <View style={styles.container}>
         <Text style={styles.header}>Notificações</Text>
         <FlatList
-
           data={notifications}
           renderItem={renderNotification}
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.notificationList}
         />
       </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: 'center',
+    width: 'auto',
+    height: 'auto'
+  },
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: '#F5F5F5',
+    padding: 20
   },
   header: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: '400',
     marginBottom: 20,
     color: '#DA8C3C',
   },
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     gap: 15,
     color: '#DA8C3C'
   },
-  notificationItem: {
+  notItem: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
@@ -78,24 +78,24 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 2,
   },
-  notificationIcon: {
+  notIcon: {
     width: 40,
     height: 40,
     marginRight: 15,
   },
-  notificationText: {
+  notText: {
     flex: 1,
   },
-  notificationTitle: {
+  notTitle: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#333',
   },
-  notificationDescription: {
+  notDescr: {
     fontSize: 14,
     color: '#666',
   },
-  notificationTime: {
+  notTime: {
     fontSize: 12,
     color: '#999',
     marginTop: 5,

@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignContent: 'center',
-    padding: 35,
+    padding: 30,
   },
   esqsenha: {
     fontSize: '15px',
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     // color: '#DA8C3C',
     fontSize: 20,
     fontFamily: 'Helvetica, sans-serif',
-    marginVertical: 10,
+    marginVertical: 20,
     alignSelf: 'center'
   },
   logo: {
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 10,
   },
   image: {
     width: 55,

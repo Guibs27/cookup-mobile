@@ -1,7 +1,7 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Image } from 'expo-image'
-import Feather from '@expo/vector-icons/Feather'
 import { Link } from 'expo-router'
+import Feather from '@expo/vector-icons/Feather'
 
 export default function Header() {
   return (
@@ -13,7 +13,7 @@ export default function Header() {
         />
       </View>
       <Link href={'category-page'}>
-      <Feather name='menu' size={24} color='#DA8C3C' style={styles.menu} />
+      <Feather name='menu' size={28} color='#DA8C3C' style={styles.menu} />
       </Link>
       <View style={styles.divisor} />
     </View>
@@ -38,14 +38,15 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   menu: {
-    padding: 5
+    padding: 5,
+    top: 3
   },
   divisor: {
     position: 'absolute',
-    bottom: 0,
+    bottom: 5,
     left: 15,
     right: 15,
     height: 1,
-    backgroundColor: '#DA8C3C',
+    backgroundColor: '#DA8C3C'
   },
 })
