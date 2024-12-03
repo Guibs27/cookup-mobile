@@ -1,75 +1,41 @@
-import { View, StyleSheet, Text, TextInput, Image, ImageBackground, TouchableOpacity, Button as RNButton } from 'react-native';
+import { View, StyleSheet, Text, TextInput, ImageBackground, TouchableOpacity, Button as RNButton } from 'react-native';
 import { useState } from 'react';
 import { useRecipeStore } from '../../stores/useRecipeStore';
 import { fetchAuth } from '../../utils/fetchAuth';
-import * as ImagePicker from 'expo-image-picker';
 import Button from '../../components/Button';
 
 export default function CreateRecipe() {
   const { addRecipe } = useRecipeStore();
+
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
-  const [method, setMethod] = useState('');
+  const [steps, setSteps] = useState('');
   const [comment, setComment] = useState('');
   const [category, setCategory] = useState('');
-  const [image, setImage] = useState(null);
-
-  // Função para escolher uma imagem
-  const pickImage = async () => {
-    const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (!permission.granted) {
-      alert('Permissão para acessar a galeria é necessária!');
-      return;
-    }
-
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      setImage(result.assets[0].uri); // Armazena o caminho da imagem
-    }
-  };
+  const [recipe_image, setRecipeImg] = useState('');
 
   // Função para criar uma nova receita
   const handleCreateRecipe = async () => {
-    const formData = new FormData();
-
-    // Adiciona os dados da receita
-    formData.append('title', title);
-    formData.append('ingredients', ingredients);
-    formData.append('method', method);
-    formData.append('comment', comment);
-    formData.append('category', category);
-
-    // Adiciona a imagem ao FormData
-    if (image) {
-      const filename = image.split('/').pop();
-      const fileType = filename.split('.').pop();
-      formData.append('image', {
-        uri: image,
-        name: filename,
-        type: `image/${fileType}`,
-      });
-    }
+    const recipe = {
+      title,
+      ingredients,
+      steps,
+      comment,
+      category,
+      recipe_image
+    };
 
     try {
-      const response = await fetch('http://localhost:3000/recipe', {
+      const response = await fetchAuth('http://localhost:3000/recipe', {
         method: 'POST',
-        body: formData,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+        body: JSON.stringify(recipe),
       });
 
       if (response.ok) {
         alert('Receita criada com sucesso!');
       } else {
         const errorData = await response.json();
-        alert(`Erro: ${errorData.error}`);
+        alert(`${errorData.error}`);
       }
     } catch (error) {
       console.error('Erro ao criar receita:', error);
@@ -84,19 +50,16 @@ export default function CreateRecipe() {
       style={styles.background}
     >
       <View style={styles.container}>
-        {/* Título */}
         <Text style={styles.title}>Adicionar receita</Text>
+        <Text style={styles.label}>URL da Imagem:</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Insira a URL da imagem para sua receita"
+          placeholderTextColor="#8a8a8a"
+          value={recipe_image}
+          onChangeText={setRecipeImg}
+        />
 
-        {/* Área para selecionar a imagem */}
-        <TouchableOpacity onPress={pickImage} style={styles.imagePicker}>
-          {image ? (
-            <Image source={{ uri: image }} style={styles.image} />
-          ) : (
-            <Text style={styles.imageText}>Adicione uma foto para sua receita</Text>
-          )}
-        </TouchableOpacity>
-
-        {/* Inputs para os dados da receita */}
         <Text style={styles.label}>Título:</Text>
         <TextInput
           style={styles.input}
@@ -121,8 +84,8 @@ export default function CreateRecipe() {
           style={[styles.input, styles.textArea]}
           placeholder="Escreva o modo de preparo"
           placeholderTextColor="#8a8a8a"
-          value={method}
-          onChangeText={setMethod}
+          value={steps}
+          onChangeText={setSteps}
           multiline
         />
 
@@ -136,14 +99,12 @@ export default function CreateRecipe() {
           multiline
         />
 
-        {/* Botão para selecionar a categoria */}
         <TouchableOpacity style={styles.categoryButton} onPress={() => alert('Selecione a categoria')}>
           <Text style={styles.categoryButtonText}>
             {category || 'Selecione a categoria da sua receita...'}
           </Text>
         </TouchableOpacity>
 
-        {/* Botão para publicar */}
         <Button onPress={handleCreateRecipe}>Adicionar</Button>
       </View>
     </ImageBackground>
@@ -166,7 +127,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: '400',
     color: '#DA8C3C',
-    marginBottom: 15,
+    marginBottom: 20,
   },
   imagePicker: {
     backgroundColor: '#EDEAEA',

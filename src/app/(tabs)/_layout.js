@@ -5,7 +5,7 @@ import { StyleSheet, Image } from 'react-native';
 
 export default function TabLayout() {
   const { avatar } = useLoginStore();
-  const router = useRouter();
+  // const router = useRouter();
 
   return (
     <Tabs

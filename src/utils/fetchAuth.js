@@ -1,54 +1,59 @@
-import { useLoginStore } from "../stores/useLoginStore"
-import { storeObjectData } from "./asyncStorage"
+import { useLoginStore } from "../stores/useLoginStore";
+import { storeObjectData } from "./asyncStorage";
 
-export async function fetchAuth(url, config) {
-  const accessToken = useLoginStore.getState().accessToken
-  const loginStore = useLoginStore.getState().login
-  const logoutStore = useLoginStore.getState().logout
+export async function fetchAuth(url, config = {}) {
+  const accessToken = useLoginStore.getState().accessToken;
+  const loginStore = useLoginStore.getState().login;
+  const logoutStore = useLoginStore.getState().logout;
+
+  const headers = {
+    ...config?.headers,
+    Authorization: `Bearer ${accessToken}`,
+  };
+
+  // Evita sobrescrever Content-Type se o corpo for FormData
+  if (!(config.body instanceof FormData)) {
+    headers["Content-Type"] = "application/json";
+  }
 
   const response = await fetch(url, {
     ...config,
-    headers: {
-      ...config?.headers,
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
-    }
-  })
+    headers,
+  });
 
-  const responseCloned = response.clone()
+  const responseCloned = response.clone();
 
   if (responseCloned.status === 401) {
-    const data = await responseCloned.json()
+    const data = await responseCloned.json();
     if (data?.error && data?.errorType === "tokenExpired") {
-      const responseRT = await fetch('http://localhost:3000/auth/refresh-token', {
-        method: 'POST',
+      const responseRT = await fetch("http://localhost:3000/auth/refresh-token", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`
-        }
-      })
-      console.log('Status', responseRT.status)
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      console.log("Status", responseRT.status);
       if (responseRT?.ok) {
-        const data = await responseRT.json()
-        loginStore({ accessToken: data?.accessToken, ...data.user })
-        await storeObjectData('userLogged', { accessToken: data?.accessToken, ...data.user })
-        console.log(data)
+        const data = await responseRT.json();
+        loginStore({ accessToken: data?.accessToken, ...data.user });
+        await storeObjectData("userLogged", { accessToken: data?.accessToken, ...data.user });
+        console.log(data);
         const responseNew = await fetch(url, {
           ...config,
           headers: {
             ...config?.headers,
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${data?.accessToken}`
-          }
-        })
-        return responseNew
+            Authorization: `Bearer ${data?.accessToken}`,
+          },
+        });
+        return responseNew;
       } else {
-        logoutStore()
-        await storeObjectData('userLogged', null)
-        console.log('Erro ao revalidar Token no Refresh Token')
+        logoutStore();
+        await storeObjectData("userLogged", null);
+        console.log("Erro ao revalidar Token no Refresh Token");
       }
     }
   }
 
-  return response
+  return response;
 }
