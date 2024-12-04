@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, TextInput, ImageBackground, TouchableOpacity, Button as RNButton } from 'react-native';
+import { View, StyleSheet, Text, TextInput, ImageBackground } from 'react-native';
 import { useState } from 'react';
 import { useRecipeStore } from '../../stores/useRecipeStore';
 import { fetchAuth } from '../../utils/fetchAuth';
@@ -6,33 +6,38 @@ import Button from '../../components/Button';
 
 export default function CreateRecipe() {
   const { addRecipe } = useRecipeStore();
-
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
-  const [steps, setSteps] = useState('');
+  const [step_by_step, setSteps] = useState('');
   const [comment, setComment] = useState('');
   const [category, setCategory] = useState('');
   const [recipe_image, setRecipeImg] = useState('');
 
-  // Função para criar uma nova receita
   const handleCreateRecipe = async () => {
     const recipe = {
       title,
       ingredients,
-      steps,
+      step_by_step, 
       comment,
       category,
       recipe_image
     };
 
+    console.log("Dados da receita antes do envio:", recipe);
+
     try {
       const response = await fetchAuth('http://localhost:3000/recipe', {
         method: 'POST',
         body: JSON.stringify(recipe),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
 
       if (response.ok) {
+        const data = await response.json();
         alert('Receita criada com sucesso!');
+        addRecipe(data.recipe);
       } else {
         const errorData = await response.json();
         alert(`${errorData.error}`);
@@ -43,7 +48,6 @@ export default function CreateRecipe() {
     }
   };
 
-
   return (
     <ImageBackground
       source={require('../../../assets/background.png')}
@@ -51,14 +55,6 @@ export default function CreateRecipe() {
     >
       <View style={styles.container}>
         <Text style={styles.title}>Adicionar receita</Text>
-        <Text style={styles.label}>URL da Imagem:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Insira a URL da imagem para sua receita"
-          placeholderTextColor="#8a8a8a"
-          value={recipe_image}
-          onChangeText={setRecipeImg}
-        />
 
         <Text style={styles.label}>Título:</Text>
         <TextInput
@@ -84,26 +80,38 @@ export default function CreateRecipe() {
           style={[styles.input, styles.textArea]}
           placeholder="Escreva o modo de preparo"
           placeholderTextColor="#8a8a8a"
-          value={steps}
+          value={step_by_step}
           onChangeText={setSteps}
           multiline
         />
 
-        <Text style={styles.label}>Adicione um comentário (opcional):</Text>
+        <Text style={styles.label}>Comentário (opcional):</Text>
         <TextInput
           style={[styles.input, styles.textArea]}
-          placeholder="Escreva o comentário"
+          placeholder="Adicione um comentário"
           placeholderTextColor="#8a8a8a"
           value={comment}
           onChangeText={setComment}
           multiline
         />
 
-        <TouchableOpacity style={styles.categoryButton} onPress={() => alert('Selecione a categoria')}>
-          <Text style={styles.categoryButtonText}>
-            {category || 'Selecione a categoria da sua receita...'}
-          </Text>
-        </TouchableOpacity>
+        <Text style={styles.label}>URL da imagem:</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Adicione a URL da imagem"
+          placeholderTextColor="#8a8a8a"
+          value={recipe_image}
+          onChangeText={setRecipeImg}
+        />
+
+        <Text style={styles.label}>Categoria:</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Escolha a categoria"
+          placeholderTextColor="#8a8a8a"
+          value={category}
+          onChangeText={setCategory}
+        />
 
         <Button onPress={handleCreateRecipe}>Adicionar</Button>
       </View>
@@ -116,37 +124,17 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: 'center',
     width: 'auto',
-    height: 'auto'
+    height: 'auto',
   },
   container: {
     flex: 1,
-    // backgroundColor: '#FFF8F0',
     padding: 20,
   },
   title: {
     fontSize: 25,
     fontWeight: '400',
     color: '#DA8C3C',
-    marginBottom: 20,
-  },
-  imagePicker: {
-    backgroundColor: '#EDEAEA',
-    borderColor: '#DA8C3C',
-    borderWidth: 1,
-    borderRadius: 10,
-    height: 200,
-    justifyContent: 'center',
-    alignItems: 'center',
     marginBottom: 15,
-  },
-  imageText: {
-    color: '#8a8a8a',
-    fontSize: 16,
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 10,
   },
   input: {
     backgroundColor: '#EDEAEA',
@@ -154,8 +142,6 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 15,
     fontSize: 16,
-    // borderColor: '#DA8C3C',
-    // borderWidth: 1,
     color: '#333',
   },
   textArea: {
@@ -166,18 +152,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#DA8C3C',
     marginBottom: 5,
-  },
-  categoryButton: {
-    backgroundColor: '#EDEAEA',
-    borderRadius: 25,
-    padding: 10,
-    // borderWidth: 1,
-    // borderColor: '#DA8C3C',
-    marginBottom: 15,
-  },
-  categoryButtonText: {
-    color: 'gray',
-    fontSize: 16,
-    marginLeft: 8
   },
 });

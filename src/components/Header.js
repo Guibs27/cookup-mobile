@@ -22,16 +22,15 @@ export default function Header() {
 
 const styles = StyleSheet.create({
   header: {
-    // backgroundColor: "#FAF6F2",
     paddingVertical: 20,
     paddingHorizontal: 15,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   logo: {
     width: '200px',
-    height: '50px',
+    height: '50px'
   },
   name: {
     fontWeight: '600',
@@ -42,11 +41,11 @@ const styles = StyleSheet.create({
     top: 3
   },
   divisor: {
+    backgroundColor: '#DA8C3C',
     position: 'absolute',
     bottom: 5,
     left: 15,
     right: 15,
     height: 1,
-    backgroundColor: '#DA8C3C'
   },
 })
