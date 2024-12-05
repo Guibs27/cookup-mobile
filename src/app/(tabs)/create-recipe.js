@@ -1,5 +1,5 @@
-import { View, StyleSheet, Text, TextInput, ImageBackground } from 'react-native';
-import { useState } from 'react';
+import { View, StyleSheet, Text, TextInput, Picker, ImageBackground } from 'react-native';
+import { useState, useEffect } from 'react';
 import { useRecipeStore } from '../../stores/useRecipeStore';
 import { fetchAuth } from '../../utils/fetchAuth';
 import Button from '../../components/Button';
@@ -12,6 +12,23 @@ export default function CreateRecipe() {
   const [comment, setComment] = useState('');
   const [category, setCategory] = useState('');
   const [recipe_image, setRecipeImg] = useState('');
+  const [categories, setCategories] = useState([]);  // Nova variável para categorias
+
+  // Função para carregar as categorias
+  const loadCategories = async () => {
+    try {
+      const response = await fetchAuth('http://localhost:3000/category/list');
+      const data = await response.json();
+      setCategories(data.categories); // Preenche o estado com as categorias
+    } catch (error) {
+      console.error('Erro ao carregar categorias:', error);
+    }
+  };
+
+  // Carregar as categorias ao montar o componente
+  useEffect(() => {
+    loadCategories();
+  }, []);
 
   const handleCreateRecipe = async () => {
     const recipe = {
@@ -19,8 +36,8 @@ export default function CreateRecipe() {
       ingredients,
       step_by_step, 
       comment,
-      category,
-      recipe_image
+      category,  // Envia o category_id
+      recipe_image,
     };
 
     console.log("Dados da receita antes do envio:", recipe);
@@ -105,13 +122,16 @@ export default function CreateRecipe() {
         />
 
         <Text style={styles.label}>Categoria:</Text>
-        <TextInput
+        <Picker
+          selectedValue={category}
           style={styles.input}
-          placeholder="Escolha a categoria"
-          placeholderTextColor="#8a8a8a"
-          value={category}
-          onChangeText={setCategory}
-        />
+          onValueChange={(itemValue) => setCategory(itemValue)}
+        >
+          <Picker.Item label="Selecione a categoria" value="" />
+          {categories.map((cat) => (
+            <Picker.Item key={cat.id} label={cat.name} value={cat.id} />
+          ))}
+        </Picker>
 
         <Button onPress={handleCreateRecipe}>Adicionar</Button>
       </View>

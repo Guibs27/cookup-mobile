@@ -52,8 +52,8 @@ export default function Login() {
 
         <TextInput
           placeholder="E-mail"
-          placeholderTextColor="#AFAFAF"
-          placeholderBack="#AFAFAF"
+          placeholderTextColor="#b8b8b8"
+          placeholderBack="#b8b8b8"
           style={inputStyle.input}
           onChangeText={setTxtEmail}
           value={txtEmail}
@@ -61,8 +61,8 @@ export default function Login() {
 
         <TextInput
           placeholder="Senha"
-          placeholderTextColor="#AFAFAF"
-          placeholderBack="#AFAFAF"
+          placeholderTextColor="#b8b8b8"
+          placeholderBack="#b8b8b8"
           style={inputStyle.input}
           onChangeText={setTxtPass}
           value={txtPass}

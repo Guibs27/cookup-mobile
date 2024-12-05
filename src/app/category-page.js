@@ -1,91 +1,130 @@
-import { View, StyleSheet, Text, ImageBackground, Image } from 'react-native';
-import { Link, useRouter } from 'expo-router';
+import { View, StyleSheet, Text, TextInput, FlatList, Pressable } from 'react-native';
+import { useState, useEffect } from 'react';
+import { fetchAuth } from '../utils/fetchAuth';
+import { inputStyle } from '../components/InputText'
+import Button from '../components/Button';
 
-export default function Profile() {
-  const router = useRouter();
+export default function CategoryPage() {
+  const [categories, setCategories] = useState([]);
+  const [name, setName] = useState('');
 
-  const categories = [
-    { id: 1, name: 'Vegetariana', image: require('../../assets/Vegetariana.png') },
-    { id: 2, name: 'Pratos quentes', image: require('../../assets/PratosQuentes.png') },
-    { id: 3, name: 'Pratos frios', image: require('../../assets/PratosFrios.png') },
-    { id: 4, name: 'Salgados', image: require('../../assets/Salgado.png') },
-    { id: 5, name: 'Doces', image: require('../../assets/Doces.png') },
-    { id: 6, name: 'Couvers', image: require('../../assets/Couveres.png') },
-  ];
+  const fetchCategories = async () => {
+    const response = await fetchAuth('http://localhost:3000/category/list');
+    if (response.ok) {
+      const data = await response.json();
+      setCategories(data.categories);
+    }
+  };
+
+  const handleCreateCategory = async () => {
+    if (!name.trim()) {
+      alert("O nome da categoria é obrigatório!");
+      return;
+    }
+
+    const response = await fetchAuth('http://localhost:3000/category', {
+      method: 'POST',
+      body: JSON.stringify({ name }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+      fetchCategories();
+      setName('');
+      alert("Categoria criada com sucesso!");
+    } else {
+      alert("Erro ao criar categoria.");
+    }
+  };
+
+  const handleDeleteCategory = async (categoryId) => {
+    console.log("ID da categoria a ser deletada:", categoryId); // Adicione este log
+  
+    const response = await fetchAuth(`http://localhost:3000/category/${categoryId}`, {
+      method: 'DELETE',
+    });
+  
+    if (response.ok) {
+      fetchCategories();
+      alert("Categoria excluída com sucesso!");
+    } else {
+      alert("Erro ao excluir categoria.");
+    }
+  };  
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
   return (
-    <ImageBackground source={require('../../assets/background.png')} style={styles.background}>
-      <View style={styles.container}>
-        <Image style={styles.logo} source={require('../../assets/logo.png')} />
-        <Text style={styles.txtCategory}>Selecione uma categoria que deseja explorar:</Text>
-        <View style={styles.fullCategory}>
-          <View style={styles.grCategory}>
-            {categories.map((category) => (
-              <View key={category.id} style={styles.categoryItem}>
-                <Link href="home">
-                  <Image style={styles.categories} source={category.image} />
-                </Link>
-              </View>
-            ))}
+    <View style={styles.container}>
+      <Text style={styles.title}>Gerenciar Categorias</Text>
+
+      {/* Campo para adicionar nova categoria */}
+      <TextInput
+        style={inputStyle.input}
+        placeholder="Digite o nome da categoria"
+        placeholderTextColor="#b8b8b8"
+        value={name}
+        onChangeText={setName}
+      />
+      <Button onPress={handleCreateCategory}>
+        <Text>Adicionar Categoria</Text>
+      </Button>
+
+      {/* Lista de categorias */}
+      <FlatList
+        data={categories}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.categoryItem}>
+            <Text style={styles.categoryText}>{item.name}</Text>
+            <Pressable style={styles.deleteButton} onPress={() => handleDeleteCategory(item.id)}>
+              <Text style={styles.deleteButtonText}>Excluir</Text>
+            </Pressable>
           </View>
-        </View>
-      </View>
-    </ImageBackground>
+        )}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center', 
-    padding: 20
+    padding: 20,
+    backgroundColor: '#fff'
   },
-  background: {
-    flex: 1,
-    resizeMode: 'center',
-    width: 'auto',
-    height: 'auto'
-  },
-  logo: {
-    width: 250,
-    height: 80,
+  title: {
+    fontSize: 25,
+    fontWeight: '400',
+    color: '#DA8C3C',
     marginBottom: 15
   },
-  txtCategory: {
-    color: '#DA8C3C',
-    fontSize: 18,
-    fontWeight: '600',
-    textAlign: 'center',
-    marginTop: 15
-  },
-  fullCategory: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 20
-  },
-  grCategory: {
-    flexDirection: 'row',
-    flexWrap: 'wrap', // Permite que as categorias quebrem para a linha seguinte
-    justifyContent: 'center',
-    gap: 15, // Espaçamento entre as categorias
-    marginTop: 10
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    borderRadius: 8,
+    marginBottom: 15,
   },
   categoryItem: {
-    alignItems: 'center',
-    justifyContent: 'center'
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
   },
-  categories: {
-    width: 150,
-    height: 150,
-    borderRadius: 20,
-    marginBottom: 5
+  categoryText: {
+    fontSize: 16
   },
-  categoryName: {
-    color: '#DA8C3C',
-    fontSize: 14,
-    marginTop: 10,
-    textAlign: 'center'
+  deleteButton: {
+    backgroundColor: '#f44336',
+    padding: 5,
+    borderRadius: 8,
+  },
+  deleteButtonText: {
+    color: '#fff',
+    fontWeight: 'bold'
   },
 });
