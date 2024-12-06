@@ -2,6 +2,7 @@ import { View, StyleSheet, Text, TextInput, Picker, ImageBackground } from 'reac
 import { useState, useEffect } from 'react';
 import { useRecipeStore } from '../../stores/useRecipeStore';
 import { fetchAuth } from '../../utils/fetchAuth';
+import { inputStyle } from '../../components/InputText'
 import Button from '../../components/Button';
 
 export default function CreateRecipe() {
@@ -34,10 +35,15 @@ export default function CreateRecipe() {
     const recipe = {
       title,
       ingredients,
-      step_by_step, 
+      step_by_step,
       comment,
-      category,  // Envia o category_id
+      category_id: category,
       recipe_image,
+    };
+
+    // Adiciona o comentário apenas se ele não estiver vazio
+    if (comment.trim() !== "") {
+      recipe.comment = comment;
     };
 
     console.log("Dados da receita antes do envio:", recipe);
@@ -124,16 +130,18 @@ export default function CreateRecipe() {
         <Text style={styles.label}>Categoria:</Text>
         <Picker
           selectedValue={category}
-          style={styles.input}
-          onValueChange={(itemValue) => setCategory(itemValue)}
+          style={inputStyle.input}
+          onValueChange={(itemValue) => setCategory(Number(itemValue))}
         >
-          <Picker.Item label="Selecione a categoria" value="" />
+          <Picker.Item label="Selecione uma categoria" value="" />
           {categories.map((cat) => (
             <Picker.Item key={cat.id} label={cat.name} value={cat.id} />
           ))}
         </Picker>
 
-        <Button onPress={handleCreateRecipe}>Adicionar</Button>
+        <View style={styles.buttonArea}>
+          <Button onPress={handleCreateRecipe}>Adicionar</Button>
+        </View>
       </View>
     </ImageBackground>
   );
@@ -154,7 +162,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: '400',
     color: '#DA8C3C',
-    marginBottom: 15,
+    marginBottom: 22,
   },
   input: {
     backgroundColor: '#EDEAEA',
@@ -169,8 +177,11 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
   },
   label: {
-    fontSize: 16,
+    fontSize: 17,
     color: '#DA8C3C',
     marginBottom: 5,
   },
+  buttonArea: {
+    marginTop: 10
+  }
 });

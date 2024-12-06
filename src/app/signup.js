@@ -2,7 +2,6 @@ import { View, StyleSheet, Text, TextInput, Alert, Image, ImageBackground } from
 import { useState } from "react";
 import { useRouter } from 'expo-router';
 import { Link } from 'expo-router';
-import Feather from '@expo/vector-icons/Feather';
 import { inputStyle } from '../components/InputText';
 import Button from '../components/Button';
 

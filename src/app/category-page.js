@@ -2,6 +2,7 @@ import { View, StyleSheet, Text, TextInput, FlatList, Pressable } from 'react-na
 import { useState, useEffect } from 'react';
 import { fetchAuth } from '../utils/fetchAuth';
 import { inputStyle } from '../components/InputText'
+import Feather from '@expo/vector-icons/Feather';
 import Button from '../components/Button';
 
 export default function CategoryPage() {
@@ -38,19 +39,17 @@ export default function CategoryPage() {
   };
 
   const handleDeleteCategory = async (categoryId) => {
-    console.log("ID da categoria a ser deletada:", categoryId); // Adicione este log
-  
     const response = await fetchAuth(`http://localhost:3000/category/${categoryId}`, {
       method: 'DELETE',
     });
-  
+
     if (response.ok) {
       fetchCategories();
       alert("Categoria excluída com sucesso!");
     } else {
       alert("Erro ao excluir categoria.");
     }
-  };  
+  };
 
   useEffect(() => {
     fetchCategories();
@@ -63,12 +62,12 @@ export default function CategoryPage() {
       {/* Campo para adicionar nova categoria */}
       <TextInput
         style={inputStyle.input}
-        placeholder="Digite o nome da categoria"
+        placeholder="Digite o nome da categoria..."
         placeholderTextColor="#b8b8b8"
         value={name}
         onChangeText={setName}
       />
-      <Button onPress={handleCreateCategory}>
+      <Button style={styles.add_category} onPress={handleCreateCategory}>
         <Text>Adicionar Categoria</Text>
       </Button>
 
@@ -79,8 +78,8 @@ export default function CategoryPage() {
         renderItem={({ item }) => (
           <View style={styles.categoryItem}>
             <Text style={styles.categoryText}>{item.name}</Text>
-            <Pressable style={styles.deleteButton} onPress={() => handleDeleteCategory(item.id)}>
-              <Text style={styles.deleteButtonText}>Excluir</Text>
+            <Pressable onPress={() => handleDeleteCategory(item.id)}>
+              <Feather name='trash-2' size={28} color='#DA8C3C' />
             </Pressable>
           </View>
         )}
@@ -101,12 +100,8 @@ const styles = StyleSheet.create({
     color: '#DA8C3C',
     marginBottom: 15
   },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 10,
-    borderRadius: 8,
-    marginBottom: 15,
+  add_category: {
+    marginBottom: 10
   },
   categoryItem: {
     flexDirection: 'row',
@@ -116,15 +111,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ccc',
   },
   categoryText: {
-    fontSize: 16
-  },
-  deleteButton: {
-    backgroundColor: '#f44336',
-    padding: 5,
-    borderRadius: 8,
-  },
-  deleteButtonText: {
-    color: '#fff',
-    fontWeight: 'bold'
-  },
+    fontSize: 18,
+    marginTop: 6
+  }
 });

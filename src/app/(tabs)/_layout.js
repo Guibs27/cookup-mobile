@@ -1,5 +1,5 @@
 import Feather from '@expo/vector-icons/Feather';
-import { Tabs, useRouter } from 'expo-router';
+import { Tabs } from 'expo-router';
 import { useLoginStore } from '../../stores/useLoginStore';
 import { StyleSheet, Image } from 'react-native';
 
