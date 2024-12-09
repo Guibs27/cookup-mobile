@@ -36,6 +36,7 @@ export default function Content() {
             id={recipe.id}
             title={recipe.title} 
             recipe_image={recipe.recipe_image} 
+            comment={recipe.comment}
             ingredients={recipe.ingredients}
           />
         ))

@@ -4,6 +4,7 @@ import { fetchAuth } from '../utils/fetchAuth';
 import { inputStyle } from '../components/InputText'
 import Feather from '@expo/vector-icons/Feather';
 import Button from '../components/Button';
+import BackButton from '../components/BackButton';
 
 export default function CategoryPage() {
   const [categories, setCategories] = useState([]);
@@ -56,35 +57,38 @@ export default function CategoryPage() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Gerenciar Categorias</Text>
+    <View>
+      <BackButton href="home" />
 
-      {/* Campo para adicionar nova categoria */}
-      <TextInput
-        style={inputStyle.input}
-        placeholder="Digite o nome da categoria..."
-        placeholderTextColor="#b8b8b8"
-        value={name}
-        onChangeText={setName}
-      />
-      <Button style={styles.add_category} onPress={handleCreateCategory}>
-        <Text>Adicionar Categoria</Text>
-      </Button>
+      <View style={styles.container}>
+        <Text style={styles.title}>Gerenciar Categorias</Text>
 
-      {/* Lista de categorias */}
-      <FlatList
-        data={categories}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.categoryItem}>
-            <Text style={styles.categoryText}>{item.name}</Text>
-            <Pressable onPress={() => handleDeleteCategory(item.id)}>
-              <Feather name='trash-2' size={28} color='#DA8C3C' />
-            </Pressable>
-          </View>
-        )}
-      />
+        <TextInput
+          style={inputStyle.input}
+          placeholder="Digite o nome da categoria..."
+          placeholderTextColor="#b8b8b8"
+          value={name}
+          onChangeText={setName}
+        />
+        <Button style={styles.add_category} onPress={handleCreateCategory}>
+          <Text>Adicionar Categoria</Text>
+        </Button>
+
+        <FlatList
+          data={categories}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <View style={styles.categoryItem}>
+              <Text style={styles.categoryText}>{item.name}</Text>
+              <Pressable onPress={() => handleDeleteCategory(item.id)}>
+                <Feather name='trash-2' size={28} color='#DA8C3C' />
+              </Pressable>
+            </View>
+          )}
+        />
+      </View>
     </View>
+
   );
 }
 

@@ -6,7 +6,7 @@ export default function CardRecipe({ id, title, comment, recipe_image }) {
   const router = useRouter();
 
   return (
-    <Pressable onPress={() => router.push({ pathname: '/show-pass', params: { id } })}>
+    <Pressable onPress={() => router.push({ pathname: '/show-recipe', params: { id } })}>
       <View style={styles.card}>
         <Image style={styles.recipeImage} source={recipe_image} />
         <View style={styles.content}>
