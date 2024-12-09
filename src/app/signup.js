@@ -163,46 +163,46 @@ export default function SignUp() {
 
 const styles = StyleSheet.create({
   content: {
-    padding: 30
+    padding: 30,
   },
   header: {
     alignItems: 'center',
-    marginTop: 125
+    marginTop: 125,
   },
   cook_icon: {
     width: 55,
     height: 40,
     marginLeft: 5,
-    marginTop: 10
+    marginTop: 10,
   },
   logo: {
     width: 250,
     height: 80,
-    marginBottom: 20
+    marginBottom: 20,
   },
   options: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10
+    marginTop: 10,
   },
   image: {
     width: 55,
     height: 54,
     marginHorizontal: 10,
-    borderRadius: 25
+    borderRadius: 25,
   },
   alt_login: {
     // color: '#DA8C3C',
     fontSize: 20,
     fontFamily: 'Helvetica, sans-serif',
     marginVertical: 20,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   background: {
     flex: 1,
     resizeMode: 'center',
     width: 'auto',
-    height: 'auto'
+    height: 'auto',
   },
 });

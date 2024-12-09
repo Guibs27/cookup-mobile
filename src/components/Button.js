@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text } from "react-native"
+import { Pressable, StyleSheet, Text } from "react-native";
 
 export default function Button({ onPress, children }) {
   return (
@@ -8,7 +8,7 @@ export default function Button({ onPress, children }) {
     >
       <Text style={styles.text}>{children}</Text>
     </Pressable>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -18,11 +18,11 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     borderRadius: 5,
     paddingVertical: 8,
-    paddingHorizontal: 30
+    paddingHorizontal: 30,
   }],
   text: {
     color: '#fff',
     fontSize: 20,
-    fontWeight: "600"
-  }
-})
+    fontWeight: "600",
+  },
+});

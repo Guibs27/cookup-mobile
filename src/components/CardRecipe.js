@@ -38,11 +38,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: '600',
-    marginBottom: 5,
+    marginBottom: 8,
   },
   comment: {
     fontSize: 14,
     color: '#777',
-    marginBottom: 10,
-  },
+    marginBottom: 4,
+  }
 });

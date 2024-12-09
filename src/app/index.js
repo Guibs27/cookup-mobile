@@ -1,9 +1,9 @@
-import { ScrollView, StyleSheet, View, Text, ActivityIndicator } from 'react-native'
-import { useEffect } from 'react'
-import Footer from '../components/Footer'
-import { useRouter } from 'expo-router'
-import { getObjectData } from '../utils/asyncStorage'
-import { useLoginStore } from '../stores/useLoginStore'
+import { ScrollView, StyleSheet, View, Text, ActivityIndicator } from 'react-native';
+import { useEffect } from 'react';
+import Footer from '../components/Footer';
+import { useRouter } from 'expo-router';
+import { getObjectData } from '../utils/asyncStorage';
+import { useLoginStore } from '../stores/useLoginStore';
 
 export default function Init() {
   const router = useRouter()
@@ -33,11 +33,11 @@ export default function Init() {
       </View>
 
     </ScrollView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-  }
+    flex: 1,
+  },
 })

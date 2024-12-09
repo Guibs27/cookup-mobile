@@ -110,7 +110,7 @@ export default function CreateRecipe() {
 
         <Text style={styles.label}>Comentário (opcional):</Text>
         <TextInput
-          style={[styles.input, styles.textArea]}
+          style={[styles.input, styles.commentArea]}
           placeholder="Adicione um comentário"
           placeholderTextColor="#8a8a8a"
           value={comment}
@@ -173,6 +173,10 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   textArea: {
+    height: 100,
+    textAlignVertical: 'top',
+  },
+  commentArea: {
     height: 80,
     textAlignVertical: 'top',
   },

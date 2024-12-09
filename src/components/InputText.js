@@ -7,6 +7,6 @@ export const inputStyle = StyleSheet.create({
     paddingVertical: 10,
     marginVertical: 5,
     borderRadius: 5,
-    fontSize: 15
+    fontSize: 15,
   }
 });

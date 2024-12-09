@@ -1,11 +1,11 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native';
 
 export default function Footer() {
   return (
     <View style={styles.footer}>
       {/* <Text style={styles.copy}>Copyright © 2024 Cookup.com</Text> */}
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -15,6 +15,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   copy: {
-    color: "#BBBBBB"
+    color: "#BBBBBB",
   }
-})
+});

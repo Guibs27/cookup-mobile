@@ -96,16 +96,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   title: {
     fontSize: 25,
     fontWeight: '400',
     color: '#DA8C3C',
-    marginBottom: 15
+    marginBottom: 15,
   },
   add_category: {
-    marginBottom: 10
+    marginBottom: 10,
   },
   categoryItem: {
     flexDirection: 'row',
@@ -116,6 +116,6 @@ const styles = StyleSheet.create({
   },
   categoryText: {
     fontSize: 18,
-    marginTop: 6
+    marginTop: 6,
   }
 });

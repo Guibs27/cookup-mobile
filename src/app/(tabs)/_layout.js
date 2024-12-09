@@ -5,7 +5,6 @@ import { StyleSheet, Image } from 'react-native';
 
 export default function TabLayout() {
   const { avatar } = useLoginStore();
-  // const router = useRouter();
 
   return (
     <Tabs
@@ -64,17 +63,9 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   avatar: {
-    width: 35,
-    height: 35,
+    width: 37,
+    height: 37,
     borderRadius: 25,
-  },
-  plus: {
-    width: 35,
-    height: 35,
-  },
-  bell: {
-    width: 35,
-    height: 35,
   },
   bar: {
     backgroundColor: '#DA8C3C',

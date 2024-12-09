@@ -1,7 +1,7 @@
-import { View, StyleSheet } from 'react-native'
-import { Image } from 'expo-image'
-import { Link } from 'expo-router'
-import Feather from '@expo/vector-icons/Feather'
+import { View, StyleSheet } from 'react-native';
+import { Image } from 'expo-image';
+import { Link } from 'expo-router';
+import Feather from '@expo/vector-icons/Feather';
 
 export default function Header() {
   return (
@@ -17,7 +17,7 @@ export default function Header() {
       </Link>
       <View style={styles.divisor} />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -26,19 +26,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   logo: {
     width: '200px',
-    height: '50px'
+    height: '50px',
   },
   name: {
     fontWeight: '600',
-    fontSize: 18
+    fontSize: 18,
   },
   menu: {
     padding: 5,
-    top: 3
+    top: 3,
   },
   divisor: {
     backgroundColor: '#DA8C3C',
@@ -48,4 +48,4 @@ const styles = StyleSheet.create({
     right: 15,
     height: 1,
   },
-})
+});

@@ -1,8 +1,8 @@
-import { ScrollView, StyleSheet } from 'react-native'
-import Header from '../../components/Header'
-import Footer from '../../components/Footer'
-import Content from '../../components/Content'
-import { ImageBackground } from 'react-native-web'
+import { ScrollView, StyleSheet } from 'react-native';
+import Header from '../../components/Header';
+import Content from '../../components/Content';
+import Footer from '../../components/Footer';
+import { ImageBackground } from 'react-native-web';
 
 
 export default function Home() {
@@ -14,17 +14,15 @@ export default function Home() {
       <ScrollView style={styles.container}>
         <Header />
         <Content />
-        <Footer />
+        {/* <Footer /> */}
       </ScrollView>
     </ImageBackground>
   )
-
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    // backgroundColor: '#fff'
+    flex: 1
   },
   background: {
     flex: 1,

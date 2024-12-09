@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import CardRecipe from './CardRecipe'; 
 import { useRecipeStore } from '../stores/useRecipeStore';
 import { fetchAuth } from '../utils/fetchAuth';
+import CardRecipe from './CardRecipe'; 
 
 export default function Content() {
   const { recipes, setRecipes } = useRecipeStore();
-
   console.log('Recipes: ', recipes);
 
   useEffect(() => {
