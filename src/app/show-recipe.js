@@ -5,6 +5,7 @@ import { useRecipeStore } from '../stores/useRecipeStore';
 import { fetchAuth } from '../utils/fetchAuth';
 import BackButton from '../components/BackButton';
 import Button from '../components/Button';
+import { ScrollView } from 'react-native-web';
 
 export default function ShowPass() {
   const router = useRouter();
@@ -40,26 +41,31 @@ export default function ShowPass() {
       source={require('../../assets/background.png')}
       style={styles.background}
     >
-      <BackButton href="home" />
+      <View style={styles.inicio}>
+        <BackButton href="home" />
+        <View style={styles.botoes}>
+          <Button onPress={() => router.push({ pathname: '/update-recipe', params: { id } })}>Editar</Button>
+          <Button onPress={handleDelete}>Excluir</Button>
+        </View>
+      </View>
 
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={styles.card}>
-          <Image style={styles.logo} source={{ uri: recipe.recipe_image }} />
           <View style={styles.content}>
             <Text style={styles.title}>{recipe.title}</Text>
             <Text style={styles.comment}>{recipe.comment}</Text>
           </View>
         </View>
-
+        <Text style={styles.subtitle}>Ingredients</Text>
         <View>
           <TextInput style={styles.input} value={recipe.ingredients || ''} multiline />
         </View>
-
-        <View style={{ flexDirection: 'row', gap: 20, flex: 1, justifyContent: 'space-between' }}>
-          <Button onPress={() => router.push({ pathname: '/update-recipe', params: { id } })}>Editar</Button>
-          <Button onPress={handleDelete}>Excluir</Button>
+        <Text style={styles.subtitle}>Modo de Preparo</Text>
+        <View>
+          <TextInput style={styles.input} value={recipe.step_by_step || ''} multiline />
         </View>
-      </View>
+        <Image style={styles.logo} source={{ uri: recipe.recipe_image }} />
+      </ScrollView>
     </ImageBackground>
   );
 }
@@ -72,8 +78,19 @@ const styles = StyleSheet.create({
     height: 'auto'
   },
   container: {
+    width: 390,
+    borderRadius: 30,
     padding: 20,
-    marginTop: 100
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 10,
+    backgroundColor: "#F8E0C7",
+    color: "#96570F"
+  },
+  subtitle: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: "#96570F"
   },
   errorText: {
     fontSize: 18,
@@ -86,27 +103,45 @@ const styles = StyleSheet.create({
     gap: 15,
     borderRadius: 10,
     alignItems: 'center',
+    color: "#96570F"
   },
   logo: {
-    width: 60,
-    height: 60,
+    width: "auto",
+    height: 250,
+    borderRadius: 10,
   },
   content: {
     gap: 6,
   },
   title: {
-    fontSize: 17,
+    fontSize: 20,
     fontWeight: 'bold',
+    color: "#96570F"
   },
   comment: {
-    color: '#777777',
+    color: "#96570F",
   },
   input: {
-    borderWidth: 1,
-    borderColor: '#444444',
     paddingHorizontal: 10,
     paddingVertical: 6,
     marginVertical: 5,
     borderRadius: 5,
+    height: 250,
+    color: "#96570F",
   },
+  inicio: {
+    paddingVertical: 20,
+    paddingHorizontal: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+
+  },
+  botoes:{
+    display: "flex",
+    marginLeft: 10,
+    flexDirection: 'row', 
+    gap: 2,  
+     
+  }
 });
