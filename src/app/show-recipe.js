@@ -22,20 +22,40 @@ export default function ShowPass() {
     );
   }
 
-  const handleDelete = async () => {
+const handleDelete = async () => {
+  try {
+    // Faz a requisição DELETE para o backend
     const response = await fetchAuth(`http://localhost:3000/recipe/${id}`, {
       method: 'DELETE',
     });
+
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
-      deleteRecipe(+id);
-      router.back();
-      return;
-    }
-    console.log('Erro ao carregar receitas');
-  };
+      console.log('Receita excluída com sucesso:', data);
 
+      // Atualiza o estado local removendo a receita
+      deleteRecipe(+id);
+      router.back(); // Retorna à página anterior
+    } else if (response.status === 401) {
+      const errorData = await response.json();
+      console.error('Erro de validação ao excluir receita:', errorData.fieldErrors);
+      alert('Erro de validação: ' + JSON.stringify(errorData.fieldErrors));
+    } else if (response.status === 404) {
+      const errorData = await response.json();
+      console.error('Receita não encontrada:', errorData.error);
+      alert(errorData.error);
+    } else {
+      const errorData = await response.json();
+      console.error('Erro desconhecido ao excluir receita:', errorData);
+      alert('Erro ao excluir a receita. Tente novamente mais tarde.');
+    }
+  } catch (error) {
+    console.error('Erro de conexão ao excluir receita:', error);
+    alert('Erro ao conectar com o servidor. Tente novamente mais tarde.');
+  }
+};
+
+  
   return (
     <ImageBackground
       source={require('../../assets/background.png')}
@@ -88,9 +108,9 @@ const styles = StyleSheet.create({
     color: "#96570F"
   },
   subtitle: {
-    fontSize: 17,
+    fontSize: 25,
     fontWeight: 'bold',
-    color: "#96570F"
+    color: "#96570F",
   },
   errorText: {
     fontSize: 18,
@@ -114,7 +134,8 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   title: {
-    fontSize: 20,
+
+    fontSize: 35,
     fontWeight: 'bold',
     color: "#96570F"
   },
@@ -137,11 +158,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
 
   },
-  botoes:{
+  botoes: {
     display: "flex",
     marginLeft: 10,
-    flexDirection: 'row', 
-    gap: 2,  
-     
+    flexDirection: 'row',
+    gap: 2,
+
   }
 });
