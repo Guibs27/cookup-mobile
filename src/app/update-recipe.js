@@ -1,8 +1,10 @@
-import { useState } from 'react';
-import { View, StyleSheet, Text, TextInput, Alert } from 'react-native';
+import { useState, useEffect } from 'react';
+import { View, StyleSheet, Text, TextInput, Alert, Picker } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useRecipeStore } from '../stores/useRecipeStore';
 import { fetchAuth } from '../utils/fetchAuth';
+import BackButton from '../components/BackButton';
+import { inputStyle } from '../components/InputText';
 import Button from '../components/Button';
 
 export default function UpdateRecipe() {
@@ -11,31 +13,50 @@ export default function UpdateRecipe() {
   const { recipes, updateRecipe } = useRecipeStore();
   const recipe = recipes.find((item) => item.id === +id);
 
-  // States para editar os campos da receita
   const [title, setTitle] = useState(recipe?.title || '');
   const [ingredients, setIngredients] = useState(recipe?.ingredients || '');
-  const [method, setMethod] = useState(recipe?.method || '');
-  const [category, setCategory] = useState(recipe?.category || '');
+  const [method, setMethod] = useState(recipe?.step_by_step || '');
+  const [category, setCategory] = useState(recipe?.category_id || '');
   const [comment, setComment] = useState(recipe?.comment || '');
+  const [recipe_image, setRecipeImg] = useState(recipe?.recipe_image || '');
+
+  // Função para carregar categorias se necessário
+  const loadCategories = async () => {
+    try {
+      const response = await fetchAuth('http://localhost:3000/category/list');
+      const data = await response.json();
+      setCategory(data.categories[0]?.id || ''); // Defina um valor inicial
+    } catch (error) {
+      console.error('Erro ao carregar categorias:', error);
+    }
+  };
+
+  useEffect(() => {
+    loadCategories();
+  }, []);
 
   const handleUpdateRecipe = async () => {
     const updatedRecipe = {
       title,
       ingredients,
-      method,
-      category,
+      step_by_step: method,
       comment,
+      category_id: category,
+      recipe_image,
     };
 
     try {
       const response = await fetchAuth(`http://localhost:3000/recipe/${id}`, {
         method: 'PUT',
         body: JSON.stringify(updatedRecipe),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
 
       if (response.ok) {
         const data = await response.json();
-        updateRecipe(data.recipe);
+        updateRecipe(data.recipe);  // Atualiza o estado global com a receita editada
         Alert.alert('Sucesso', 'Receita atualizada com sucesso!');
         router.back();
       } else {
@@ -79,20 +100,30 @@ export default function UpdateRecipe() {
       />
 
       <Text style={styles.label}>Categoria:</Text>
-      <TextInput
+      <Picker
+        selectedValue={category}
         style={styles.input}
-        onChangeText={setCategory}
-        value={category}
-        placeholder="Digite a categoria..."
-        placeholderTextColor="#DDDDDD"
-      />
+        onValueChange={(itemValue) => setCategory(Number(itemValue))}
+      >
+        <Picker.Item label="Selecione uma categoria" value="" />
+      </Picker>
 
       <Text style={styles.label}>Comentário (opcional):</Text>
       <TextInput
-        style={styles.input}
+        style={[styles.input, styles.commentArea]}
         onChangeText={setComment}
         value={comment}
         placeholder="Adicione um comentário..."
+        placeholderTextColor="#DDDDDD"
+        multiline
+      />
+
+      <Text style={styles.label}>URL da imagem:</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={setRecipeImg}
+        value={recipe_image}
+        placeholder="Adicione a URL da imagem"
         placeholderTextColor="#DDDDDD"
       />
 
@@ -121,6 +152,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   textArea: {
+    height: 100,
+    textAlignVertical: 'top',
+  },
+  commentArea: {
     height: 80,
     textAlignVertical: 'top',
   },

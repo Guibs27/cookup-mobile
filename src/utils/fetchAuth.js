@@ -11,7 +11,6 @@ export async function fetchAuth(url, config = {}) {
     Authorization: `Bearer ${accessToken}`,
   };
 
-  // Evita sobrescrever Content-Type se o corpo for FormData
   if (!(config.body instanceof FormData)) {
     headers["Content-Type"] = "application/json";
   }
