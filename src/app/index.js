@@ -26,8 +26,8 @@ export default function Init() {
   return (
     <ScrollView style={styles.container}>
       <View style={{ flex: 1, marginTop: 100, justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={{ fontSize: 30 }}>MyPass</Text>
-        <Text style={{ fontSize: 16, marginVertical: 10 }}>Organize suas contas e senhas com o MyPass.</Text>
+        <Text style={{ fontSize: 30 }}>Cookup</Text>
+        <Text style={{ fontSize: 16, marginVertical: 10 }}>Organize suas receitas com Cookup</Text>
         <ActivityIndicator style={{ marginVertical: 30 }} />
         <Footer />
       </View>
