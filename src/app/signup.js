@@ -1,7 +1,7 @@
 import { View, StyleSheet, Text, TextInput, Alert, Image, ImageBackground } from 'react-native';
 import { useState } from "react";
 import { useRouter } from 'expo-router';
-import { Link } from 'expo-router';
+import BackButton from '../components/BackButton';
 import { inputStyle } from '../components/InputText';
 import Button from '../components/Button';
 
@@ -79,12 +79,7 @@ export default function SignUp() {
       source={require('../../assets/background.png')}
       style={styles.background}
     >
-      <Link href="login">
-        <Image
-          style={styles.cook_icon}
-          source={require('../../assets/cookie-icon.png')}
-        />
-      </Link>
+      <BackButton href="login" />
 
       <View style={styles.content}>
         <View style={styles.header}>
@@ -138,30 +133,38 @@ export default function SignUp() {
           maxLength={10}
         />
 
-        <Button onPress={handleCreateAccount}>Cadastrar</Button>
+        <View style={styles.buttonArea}>
+          <Button onPress={handleCreateAccount}>Cadastrar</Button>
+        </View>
 
         <Text style={styles.alt_login}>ou</Text>
 
-          <View style={styles.options}>
-            <Image
-              style={styles.image}
-              source={require('../../assets/google-logo.png')}
-            />
-            <Image
-              style={styles.image}
-              source={require('../../assets/facebook-icon.png')}
-            />
-            <Image
-              style={styles.image}
-              source={require('../../assets/instagram-icon.png')}
-            />
-          </View>
+        <View style={styles.options}>
+          <Image
+            style={styles.image}
+            source={require('../../assets/google-logo.png')}
+          />
+          <Image
+            style={styles.image}
+            source={require('../../assets/facebook-icon.png')}
+          />
+          <Image
+            style={styles.image}
+            source={require('../../assets/instagram-icon.png')}
+          />
+        </View>
       </View>
     </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: 'center',
+    width: 'auto',
+    height: 'auto',
+  },
   content: {
     padding: 30,
   },
@@ -180,6 +183,9 @@ const styles = StyleSheet.create({
     height: 80,
     marginBottom: 20,
   },
+  buttonArea: {
+    marginTop: 10,
+  },
   options: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -193,16 +199,9 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   alt_login: {
-    // color: '#DA8C3C',
     fontSize: 20,
     fontFamily: 'Helvetica, sans-serif',
     marginVertical: 20,
     alignSelf: 'center',
-  },
-  background: {
-    flex: 1,
-    resizeMode: 'center',
-    width: 'auto',
-    height: 'auto',
   },
 });

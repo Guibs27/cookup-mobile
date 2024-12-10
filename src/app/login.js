@@ -51,19 +51,18 @@ export default function Login() {
         />
 
         <TextInput
+          style={inputStyle.input}
           placeholder="E-mail"
           placeholderTextColor="#b8b8b8"
-          placeholderBack="#b8b8b8"
-          style={inputStyle.input}
           onChangeText={setTxtEmail}
           value={txtEmail}
+          keyboardType="email-address"
         />
 
         <TextInput
+          style={inputStyle.input}
           placeholder="Senha"
           placeholderTextColor="#b8b8b8"
-          placeholderBack="#b8b8b8"
-          style={inputStyle.input}
           onChangeText={setTxtPass}
           value={txtPass}
           secureTextEntry={true}
@@ -71,8 +70,10 @@ export default function Login() {
 
         <Text style={styles.esqsenha}>Esqueceu a senha?</Text>
 
-        <Button onPress={handleLogin}>Entrar</Button>
-        <Button onPress={() => router.push('/signup')}>Cadastre-se</Button>
+        <View style={styles.buttonArea}>
+          <Button onPress={handleLogin}>Entrar</Button>
+          <Button onPress={() => router.push('/signup')}>Cadastre-se</Button>
+        </View>
 
         <Text style={styles.alt_login}>ou</Text>
 
@@ -111,12 +112,13 @@ const styles = StyleSheet.create({
   esqsenha: {
     fontSize: '15px',
     marginVertical: 10,
-    // fontWeight: '...',
     fontFamily: 'Helvetica, sans-serif',
     color: '#DA8C3C'
   },
+  buttonArea: {
+    marginTop: 10,
+  },
   alt_login: {
-    // color: '#DA8C3C',
     fontSize: 20,
     fontFamily: 'Helvetica, sans-serif',
     marginVertical: 20,

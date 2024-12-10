@@ -1,11 +1,14 @@
-import { View, StyleSheet, Text, TextInput, Alert } from 'react-native';
+import { View, StyleSheet, Text, TextInput, ImageBackground, Alert } from 'react-native';
 import { useState } from 'react';
 import { useLoginStore } from '../stores/useLoginStore';
 import { useRouter } from 'expo-router';
+import { inputStyle } from '../components/InputText';
+import BackButton from '../components/BackButton';
 import Button from '../components/Button';
+import { fetchAuth } from '../utils/fetchAuth';
 
 export default function UpdateUser() {
-  const { avatar, name, birth_date, email, updateProfile } = useLoginStore();
+  const { public_id, name, email, birth_date, avatar, login } = useLoginStore();
   const router = useRouter();
 
   const [newName, setNewName] = useState(name || '');
@@ -21,84 +24,107 @@ export default function UpdateUser() {
       avatar: newAvatar,
     };
 
-    const response = await fetch('http://localhost:3000/user/update', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updatedProfile),
-    });
+    try {
+      const response = await fetchAuth(`http://localhost:3000/user/${public_id}`, {
+        method: 'PUT',
+        body: JSON.stringify(updatedProfile),
+      });
 
-    if (response.ok) {
-      const data = await response.json();
-      updateProfile(data.user); // Atualizando o estado global
-      Alert.alert('Sucesso', 'Perfil atualizado com sucesso!');
-      router.push('/profile');
-    } else {
-      Alert.alert('Erro', 'Não foi possível atualizar o perfil.');
+      if (response.ok) {
+        const data = await response.json();
+        login(data.user);
+        Alert.alert('Sucesso', 'Perfil atualizado com sucesso!');
+        router.push('/profile');
+      } else {
+        const errorData = await response.json();
+        Alert.alert('Erro', errorData.error || 'Não foi possível atualizar o perfil.');
+      }
+    } catch (error) {
+      console.error('Erro ao atualizar perfil:', error);
+      Alert.alert('Erro', 'Erro ao conectar com o servidor.');
     }
   };
 
   return (
     <ImageBackground
-    source={require('../../assets/background.png')}
-    style={styles.background}
-  >
-    <View style={styles.container}>
-      <Text style={styles.label}>Nome:</Text>
-      <TextInput
-        style={styles.input}
-        value={newName}
-        onChangeText={setNewName}
-        placeholder="Digite seu nome..."
-      />
-      <Text style={styles.label}>Email:</Text>
-      <TextInput
-        style={styles.input}
-        value={newEmail}
-        onChangeText={setNewEmail}
-        placeholder="Digite seu email..."
-        keyboardType="email-address"
-      />
-      <Text style={styles.label}>Data de Nascimento:</Text>
-      <TextInput
-        style={styles.input}
-        value={newBirthDate}
-        onChangeText={setNewBirthDate}
-        placeholder="DD-MM-YYYY"
-      />
-      <Text style={styles.label}>URL do Avatar:</Text>
-      <TextInput
-        style={styles.input}
-        value={newAvatar}
-        onChangeText={setNewAvatar}
-        placeholder="Link da imagem do avatar..."
-        keyboardType="url"
-      />
-      <Button onPress={handleUpdateProfile}>Salvar Alterações</Button>
-    </View>
-    </ImageBackground >
+      source={require('../../assets/background.png')}
+      style={styles.background}
+    >
+      <BackButton href="profile" />
+
+      <View style={styles.container}>
+        <Text style={styles.title}>Editar Usuário</Text>
+
+        <Text style={styles.label}>Nome:</Text>
+        <TextInput
+          style={inputStyle.input}
+          value={newName}
+          onChangeText={setNewName}
+          placeholder="Digite seu nome..."
+          placeholderTextColor="#b8b8b8"
+        />
+
+        <Text style={styles.label}>Email:</Text>
+        <TextInput
+          style={inputStyle.input}
+          value={newEmail}
+          onChangeText={setNewEmail}
+          placeholder="Digite seu email..."
+          placeholderTextColor="#b8b8b8"
+          keyboardType="email-address"
+        />
+
+        <Text style={styles.label}>Data de Nascimento:</Text>
+        <TextInput
+          style={inputStyle.input}
+          value={newBirthDate}
+          onChangeText={setNewBirthDate}
+          placeholder="DD-MM-YYYY"
+          placeholderTextColor="#b8b8b8"
+        />
+
+        <Text style={styles.label}>URL do Avatar:</Text>
+        <TextInput
+          style={inputStyle.input}
+          value={newAvatar}
+          onChangeText={setNewAvatar}
+          placeholder="Link da imagem do avatar..."
+          placeholderTextColor="#b8b8b8"
+          keyboardType="url"
+        />
+
+        <View style={styles.buttonArea}>
+          <Button onPress={handleUpdateProfile}>Salvar Alterações</Button>
+        </View>
+      </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: 'center',
+    width: 'auto',
+    height: 'auto',
+  },
   container: {
-    marginTop: 200,
     flex: 1,
     padding: 20,
-    backgroundColor: '#fff',
+  },
+  title: {
+    fontSize: 25,
+    fontWeight: '400',
+    color: '#DA8C3C',
+    marginBottom: 22,
   },
   label: {
-    fontSize: 18,
-    marginBottom: 8,
-    color: '#333',
+    fontSize: 17.5,
+    color: '#DA8C3C',
+    marginBottom: 5,
+    marginTop: 8,
   },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    padding: 10,
-    marginBottom: 15,
-    backgroundColor: '#f9f9f9',
+  buttonArea: {
+    marginTop: 10,
   },
 });

@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     marginBottom: 8,
+    color: '#333'
   },
   comment: {
     fontSize: 14,

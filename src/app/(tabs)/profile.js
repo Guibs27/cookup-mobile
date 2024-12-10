@@ -54,14 +54,14 @@ export default function Profile() {
         </View>
 
         <View style={styles.info}>
-          <Text style={styles.title}>Email:</Text>
+          <Text style={styles.label}>Email:</Text>
           <Text style={inputStyle.input}>{email}</Text>
 
-          <Text style={styles.title}>Data de nascimento:</Text>
+          <Text style={styles.label}>Data de nascimento:</Text>
           <Text style={inputStyle.input}>{birth_date}</Text>
 
           <View style={styles.buttons}>
-            <Button onPress={null}>Editar Perfil</Button>
+            <Button onPress={() => router.push({ pathname: '/update-user' })}>Editar Perfil</Button>
             <Button onPress={handleLogout}>Logout</Button>
           </View>
         </View>
@@ -109,10 +109,11 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     margin: 20
   },
-  title: {
+  label: {
     fontSize: 20,
+    color: '#DA8C3C',
+    marginBottom: 5,
     marginTop: 8,
-    // fontWeight: '600'
   },
   buttons: {
     justifyContent: 'center',

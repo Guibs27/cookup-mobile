@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, TextInput, FlatList, Pressable } from 'react-native';
+import { View, StyleSheet, Text, TextInput, FlatList, Pressable, ImageBackground } from 'react-native';
 import { useState, useEffect } from 'react';
 import { fetchAuth } from '../utils/fetchAuth';
 import { inputStyle } from '../components/InputText'
@@ -57,7 +57,10 @@ export default function CategoryPage() {
   }, []);
 
   return (
-    <View>
+    <ImageBackground
+      source={require('../../assets/background.png')}
+      style={styles.background}
+    >
       <BackButton href="home" />
 
       <View style={styles.container}>
@@ -87,16 +90,21 @@ export default function CategoryPage() {
           )}
         />
       </View>
-    </View>
+    </ImageBackground>
 
   );
 }
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: 'center',
+    width: 'auto',
+    height: 'auto'
+  },
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#fff',
   },
   title: {
     fontSize: 25,

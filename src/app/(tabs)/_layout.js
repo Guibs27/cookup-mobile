@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     width: 37,
     height: 37,
     borderRadius: 25,
+    marginBottom: 0.2
   },
   bar: {
     backgroundColor: '#DA8C3C',

@@ -5,8 +5,8 @@ export const inputStyle = StyleSheet.create({
     backgroundColor: '#EDEAEA',
     paddingHorizontal: 14,
     paddingVertical: 10,
-    marginVertical: 5,
+    marginBottom: 6,
     borderRadius: 5,
-    fontSize: 15,
+    fontSize: 16,
   }
 });
