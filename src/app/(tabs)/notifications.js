@@ -4,9 +4,6 @@ import { useRouter } from 'expo-router';
 import Feather from '@expo/vector-icons/Feather';
 
 export default function Notifications() {
-  const router = useRouter();
-
-  // Exemplo de notificações simuladas
   const notifications = [
     { id: '1', title: 'Nova receita publicada!', description: 'Confira nossa nova receita de bolo de chocolate.', time: '2 min atrás' },
     { id: '2', title: 'Atualização no seu perfil', description: 'Seu perfil foi atualizado com sucesso.', time: '10 min atrás' },
@@ -102,7 +99,7 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    resizeMode: 'cover', // Alterado para 'cover' para garantir que o fundo cubra toda a tela
+    resizeMode: 'cover',
     width: '100%',
     height: '100%',
   },

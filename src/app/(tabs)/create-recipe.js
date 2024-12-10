@@ -13,20 +13,18 @@ export default function CreateRecipe() {
   const [comment, setComment] = useState('');
   const [category, setCategory] = useState('');
   const [recipe_image, setRecipeImg] = useState('');
-  const [categories, setCategories] = useState([]);  // Nova variável para categorias
+  const [categories, setCategories] = useState([]); 
 
-  // Função para carregar as categorias
   const loadCategories = async () => {
     try {
       const response = await fetchAuth('http://localhost:3000/category/list');
       const data = await response.json();
-      setCategories(data.categories); // Preenche o estado com as categorias
+      setCategories(data.categories);
     } catch (error) {
       console.error('Erro ao carregar categorias:', error);
     }
   };
 
-  // Carregar as categorias ao montar o componente
   useEffect(() => {
     loadCategories();
   }, []);
@@ -41,7 +39,6 @@ export default function CreateRecipe() {
       recipe_image,
     };
 
-    // Adiciona o comentário apenas se ele não estiver vazio
     if (comment.trim() !== "") {
       recipe.comment = comment;
     };
@@ -81,18 +78,18 @@ export default function CreateRecipe() {
 
         <Text style={styles.label}>Título:</Text>
         <TextInput
-          style={styles.input}
+          style={inputStyle.input}
           placeholder="Insira um título para sua receita"
-          placeholderTextColor="#8a8a8a"
+          placeholderTextColor="#b8b8b8"
           value={title}
           onChangeText={setTitle}
         />
 
         <Text style={styles.label}>Ingredientes:</Text>
         <TextInput
-          style={[styles.input, styles.textArea]}
+          style={[inputStyle.input, styles.textArea]}
           placeholder="Escreva os ingredientes"
-          placeholderTextColor="#8a8a8a"
+          placeholderTextColor="#b8b8b8"
           value={ingredients}
           onChangeText={setIngredients}
           multiline
@@ -100,9 +97,9 @@ export default function CreateRecipe() {
 
         <Text style={styles.label}>Modo de preparo:</Text>
         <TextInput
-          style={[styles.input, styles.textArea]}
+          style={[inputStyle.input, styles.textArea]}
           placeholder="Escreva o modo de preparo"
-          placeholderTextColor="#8a8a8a"
+          placeholderTextColor="#b8b8b8"
           value={step_by_step}
           onChangeText={setSteps}
           multiline
@@ -110,9 +107,9 @@ export default function CreateRecipe() {
 
         <Text style={styles.label}>Comentário (opcional):</Text>
         <TextInput
-          style={[styles.input, styles.commentArea]}
+          style={[inputStyle.input, styles.commentArea]}
           placeholder="Adicione um comentário"
-          placeholderTextColor="#8a8a8a"
+          placeholderTextColor="#b8b8b8"
           value={comment}
           onChangeText={setComment}
           multiline
@@ -120,9 +117,9 @@ export default function CreateRecipe() {
 
         <Text style={styles.label}>URL da imagem:</Text>
         <TextInput
-          style={styles.input}
+          style={inputStyle.input}
           placeholder="Adicione a URL da imagem"
-          placeholderTextColor="#8a8a8a"
+          placeholderTextColor="#b8b8b8"
           value={recipe_image}
           onChangeText={setRecipeImg}
         />
@@ -164,14 +161,6 @@ const styles = StyleSheet.create({
     color: '#DA8C3C',
     marginBottom: 22,
   },
-  input: {
-    backgroundColor: '#EDEAEA',
-    borderRadius: 5,
-    padding: 10,
-    marginBottom: 15,
-    fontSize: 16,
-    color: '#333',
-  },
   textArea: {
     height: 100,
     textAlignVertical: 'top',
@@ -184,6 +173,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: '#DA8C3C',
     marginBottom: 5,
+    marginTop: 8,
   },
   buttonArea: {
     marginTop: 10
