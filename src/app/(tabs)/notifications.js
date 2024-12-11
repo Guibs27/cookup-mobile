@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 24,
-    fontWeight: '400',
+    fontWeight: '600',
     marginBottom: 20,
     color: '#DA8C3C',
   },

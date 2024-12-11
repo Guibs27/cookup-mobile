@@ -6,10 +6,8 @@ import { inputStyle } from '../components/InputText';
 import Button from '../components/Button';
 
 const formatDate = (text) => {
-  // Remove tudo que não for número
   const cleaned = text.replace(/\D/g, '');
 
-  // Aplica a formatação dd/mm/yyyy
   let formatted = cleaned;
   if (cleaned.length >= 3) {
     formatted = `${cleaned.slice(0, 2)}/${cleaned.slice(2, 4)}`;
@@ -30,14 +28,12 @@ export default function SignUp() {
   const [txtBirthDate, setTxtBirthDate] = useState('');
 
   const handleCreateAccount = async () => {
-    // Validação da data no formato "dd/mm/yyyy"
     const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
     if (!dateRegex.test(txtBirthDate)) {
       Alert.alert('Erro', 'Por favor, insira uma data válida no formato dd/mm/yyyy.');
       return;
     }
 
-    // Converter a data para o formato ISO (YYYY-MM-DD)
     const [day, month, year] = txtBirthDate.split('/');
     const formattedDate = `${year}-${month}-${day}`;
 
@@ -79,10 +75,12 @@ export default function SignUp() {
       source={require('../../assets/background.png')}
       style={styles.background}
     >
-      <BackButton href="login" />
+      <View style={styles.header}>
+        <BackButton href="login" />
+      </View>
 
       <View style={styles.content}>
-        <View style={styles.header}>
+        <View style={styles.header2}>
           <Image
             style={styles.logo}
             source={require('../../assets/logo.png')}
@@ -169,6 +167,12 @@ const styles = StyleSheet.create({
     padding: 30,
   },
   header: {
+    padding: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  header2: {
     alignItems: 'center',
     marginTop: 125,
   },

@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 25,
-    fontWeight: '400',
+    fontWeight: '600',
     color: '#DA8C3C',
     marginBottom: 22,
   },
@@ -171,6 +171,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 17,
+    // fontWeight: '600',
     color: '#DA8C3C',
     marginBottom: 5,
     marginTop: 8,

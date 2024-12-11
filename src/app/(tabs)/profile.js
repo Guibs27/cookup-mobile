@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     gap: 30,
-    padding: 10
+    padding: 5
   },
   main: {
     flexDirection: 'row',
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderRadius: 80,
-    borderColor: '#DA8C3C',
+    borderColor: '#96570F',
     borderStyle: 'solid',
     borderWidth: 1,
     marginLeft: '20px',
@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 25,
     fontWeight: '600',
+    color: '#96570F',
     marginLeft: 20,
     marginTop: 15
   },
@@ -111,6 +112,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 20,
+    fontWeight: '600',
     color: '#DA8C3C',
     marginBottom: 5,
     marginTop: 8,
