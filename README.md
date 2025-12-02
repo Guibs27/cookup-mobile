@@ -8,11 +8,11 @@ Este projeto é um app React Native de criação de receitas, criado com Expo. A
 - Expo CLI (opcional): `npm install -g expo-cli` ou usar `npx expo` diretamente
 - (Para Android) Android Studio + AVD configurado ou um dispositivo Android com modo desenvolvedor ativado
 
-**Instalação:**
+**Instalação -**
 No PowerShell, dentro da pasta do projeto:
 
 ```powershell
-cd 'C:\caminho-diretório'
+cd 'C:\working-directory'
 npm install
 ```
 
