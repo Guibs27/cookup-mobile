@@ -110,9 +110,8 @@ const styles = StyleSheet.create({
     padding: 30,
   },
   esqsenha: {
-    fontSize: '15px',
+    fontSize: 15,
     marginVertical: 10,
-    fontFamily: 'Helvetica, sans-serif',
     color: '#DA8C3C'
   },
   buttonArea: {
@@ -127,7 +126,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 250,
     height: 80,
-    marginBottom: '20px',
+    marginBottom: 20,
     alignSelf: 'center'
   },
   options: {

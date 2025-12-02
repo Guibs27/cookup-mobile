@@ -74,9 +74,7 @@ export default function Profile() {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    resizeMode: 'center',
-    width: 'auto',
-    height: 'auto'
+    resizeMode: 'center'
   },
   container: {
     flex: 1,
@@ -95,8 +93,8 @@ const styles = StyleSheet.create({
     borderColor: '#96570F',
     borderStyle: 'solid',
     borderWidth: 1,
-    marginLeft: '20px',
-    marginTop: '20px'
+    marginLeft: 20,
+    marginTop: 20
   },
   name: {
     fontSize: 25,

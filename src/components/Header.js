@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   logo: {
-    width: '200px',
-    height: '50px',
+    width: 200,
+    height: 50,
   },
   name: {
     fontWeight: '600',

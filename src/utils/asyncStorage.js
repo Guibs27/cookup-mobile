@@ -10,7 +10,7 @@ export const storeObjectData = async (key, value) => {
 
 export const deleteObjectData = async (key) => {
   try {
-    await AsyncStorage.setItem(key, null)
+    await AsyncStorage.removeItem(key)
   } catch (e) {
     console.log(e)
   }
