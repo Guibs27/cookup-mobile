@@ -10,15 +10,17 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarStyle: styles.bar
+        tabBarActiveTintColor: '#be4f00',
+        tabBarInactiveTintColor: '#fff',
+        tabBarStyle: { backgroundColor: '#DA8C3C' },
       }}
     >
       <Tabs.Screen
         name="home"
         options={{
           tabBarLabel: '',
-          tabBarIcon: () => (
-            <Feather name='home' size={28} color={'#fff'} />
+          tabBarIcon: ({ color }) => (
+            <Feather name='home' size={32} color={color} />
           ),
         }}
       />
@@ -27,8 +29,8 @@ export default function TabLayout() {
         name="create-recipe"
         options={{
           tabBarLabel: '',
-          tabBarIcon: () => (
-            <Feather name='plus' size={34} color={'#fff'} style={styles.icons} />
+          tabBarIcon: ({ color }) => (
+            <Feather name='plus' size={38} color={color} />
           ),
         }}
       />
@@ -37,8 +39,8 @@ export default function TabLayout() {
         name="notifications"
         options={{
           tabBarLabel: '',
-          tabBarIcon: () => (
-            <Feather name='bell' size={28} color={'#fff'} style={styles.icons} />
+          tabBarIcon: ({ color }) => (
+            <Feather name='bell' size={30} color={color} style={{ marginTop: 1.5 }} />
           ),
         }}
       />
@@ -47,8 +49,9 @@ export default function TabLayout() {
         name="profile"
         options={{
           tabBarLabel: '',
-          tabBarIcon: () => (
-            <Image style={styles.avatar} source={avatar} />
+          tabBarIcon: ({ color }) => (
+            // <Image style={styles.avatar} source={avatar} />
+            <Feather name='user' size={30} color={color} />
           ),
         }}
       />
@@ -62,13 +65,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 10,
   },
-  avatar: {
-    width: 37,
-    height: 37,
-    borderRadius: 25,
-    marginBottom: 0.2
-  },
-  bar: {
-    backgroundColor: '#DA8C3C',
-  },
+  // avatar: {
+  //   width: 37,
+  //   height: 37,
+  //   borderRadius: 25,
+  //   marginBottom: 0.2,
+  //   borderWidth: 2,
+  //   borderColor: '#fff',
+  // },
 });

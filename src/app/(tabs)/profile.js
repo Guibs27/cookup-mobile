@@ -7,7 +7,7 @@ import { inputStyle } from '../../components/InputText';
 import Button from '../../components/Button';
 
 export default function Profile() {
-  const { avatar, name, birth_date, email } = useLoginStore(); // Chamando birth_date
+  const { avatar, name, birth_date, email } = useLoginStore();
   const { logout: logoutStore, accessToken } = useLoginStore();
   const router = useRouter();
 
@@ -44,7 +44,6 @@ export default function Profile() {
       style={styles.background}
     >
       <View style={styles.container}>
-
         <View style={styles.main}>
           <Image
             style={styles.avatar}
@@ -74,34 +73,35 @@ export default function Profile() {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    resizeMode: 'center'
+    resizeMode: 'center',
+    width: 'auto',
+    height: 'auto',
   },
   container: {
     flex: 1,
     gap: 30,
-    padding: 5
+    padding: 5,
+    justifyContent: 'center',
   },
   main: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
-    marginTop: 100
   },
   avatar: {
-    width: 120,
-    height: 120,
+    width: 160,
+    height: 160,
     borderRadius: 80,
-    borderColor: '#96570F',
-    borderStyle: 'solid',
-    borderWidth: 1,
-    marginLeft: 20,
-    marginTop: 20
+    // borderColor: '#96570F',
+    // borderWidth: 3,
+    // marginLeft: 20,
+    // marginTop: 20
   },
   name: {
     fontSize: 25,
     fontWeight: '600',
-    color: '#96570F',
-    marginLeft: 20,
-    marginTop: 15
+    color: '#C26C2D',
+    // marginLeft: 20,
+    marginTop: 13
   },
   info: {
     justifyContent: 'center',

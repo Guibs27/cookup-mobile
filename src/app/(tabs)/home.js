@@ -21,13 +21,13 @@ export default function Home() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
   background: {
     flex: 1,
     resizeMode: 'center',
     width: 'auto',
     height: 'auto'
-  }
+  },
+  container: {
+    flex: 1
+  },
 })

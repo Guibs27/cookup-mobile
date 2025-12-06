@@ -20,13 +20,14 @@ export default function CardRecipe({ id, title, comment, recipe_image }) {
 
 const styles = StyleSheet.create({
   card: {
-    margin: 10,
+    marginVertical: 14,
+    marginHorizontal: 10,
     borderStyle: 'solid',
-    borderColor: '#e6e6e6',
+    borderColor: '#ffefdf',
     borderWidth: 1,
     borderRadius: 10,
     overflow: 'hidden',
-    backgroundColor: '#fcfcfc',
+    backgroundColor: '#ffefdf',
   },
   recipeImage: {
     width: '100%',
@@ -38,12 +39,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: '600',
-    marginBottom: 8,
+    marginBottom: 4,
     color: '#333'
   },
   comment: {
     fontSize: 14,
-    color: '#777',
-    marginBottom: 4,
+    color: '#977b57',
+    marginBottom: 1,
   }
 });
