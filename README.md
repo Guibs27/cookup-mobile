@@ -1,6 +1,6 @@
-﻿# Cookup Mobile - Instruções de execução
+﻿# Cookup Mobile
 
-Este projeto é um app React Native de criação de receitas, criado com Expo. As instruções abaixo estão adaptadas para Windows (PowerShell).
+Este projeto é um app React Native de criação e organização de receitas, criado com Expo. As instruções para execução abaixo estão adaptadas para Windows (PowerShell).
 
 **Pré-requisitos**
 - Node.js (recomenda-se LTS atual)
